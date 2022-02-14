@@ -1,0 +1,62 @@
+{% extends 'vote/base.html' %}
+{% load static %}
+{% block title_block %}
+    <title>Photo Data</title>
+{% endblock %}
+
+{% block body_block %}
+    <div class="parent2">
+        <div class="title">
+            Step 3 of 4: Photo Data
+        </div>
+        <div class="stepper">
+            <img class="icon" src="{% static 'images/check.svg' %}" alt="check">
+            <div class="separator"></div>
+            <img class="icon" src="{% static 'images/check.svg' %}" alt="check">
+            <div class="separator"></div>
+            <img class="icon" src="{% static 'images/current.svg' %}" alt="current">
+            <div class="separator"></div>
+            <img class="icon" src="{% static 'images/circle.svg' %}" alt="circle">
+        </div>
+
+        <div class="content">
+            Kindly fill up the following fields as correctly and accurately as possible.
+        </div>
+        <div class="content">
+            Please note that providing false information is a crime punishable by law.
+        </div>
+        <div class="formWrapper">
+            <div class="form">
+                <form action="" method="post">
+                {% csrf_token %}
+                    <div class="fieldWrapper">
+                        {{ form.subject.errors }}
+                        <label for="id_County">Photo</label>
+                        <label for="id_County">Click the button below and choose an approriate portrait image of you</label>
+                        <input type="file" class="input" accept="image/*" onchange="loadFile(event)" value="Add Photo">
+                        <img id="output" src="{% static 'images/user.svg' %}"/>
+
+                        <input type="reset" value="Remove Photo">
+
+                    </div>
+
+                    <div class="button-group">
+                        <a class="submit" href={% url 'vote:bio' %}>BACK</a>
+                        <input id="submit2" type="submit" value="SUBMIT"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var loadFile = function(event) {
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+            URL.revokeObjectURL(output.src) // free memory
+            }
+        };
+    </script>
+
+{% endblock %}

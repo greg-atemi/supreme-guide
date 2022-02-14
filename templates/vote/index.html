@@ -1,0 +1,70 @@
+{% extends 'vote/base.html' %}
+{% load static %}
+{% block title_block %}
+    <title>Index</title>
+{% endblock %}
+
+{% block body_block %}
+    <div class="parent">
+        <div class="banner-container">
+            <img class="banner" src="{% static 'images/Banner.svg' %}" alt="logo">
+        </div>
+        <div class="title">
+            WELCOME!
+        </div>
+
+        <div class="content">
+            Thank you for your interest in registering to vote. We are glad to be of assistance.
+        </div>
+        <div class="content">
+            Please note that the voter registration application may be used to do the following:
+        </div>
+        <div class="list">
+            <ul>
+                <li>Register as a voter</li>
+                <li>Update your registration information.</li>
+                <li>Check your voter registration status</li>
+            </ul>
+        </div>
+        <div class="content-title">
+            To register or update your voter registration:
+        </div>
+        <div class="content">
+            Use this website to submit an application online
+        </div>
+        <div class="content-title">
+            To submit an online application, you will need:
+        </div>
+        <div class="list">
+            <ul>
+                <li>Valid Kenyan ID or Kenyan Passport</li>
+                <li>Current Passport photo</li>
+            </ul>
+        </div>
+        <div class="content-title">
+            To be eligible to register to vote you must:
+        </div>
+        <div class="list-container">
+            <div class="long-list">
+                <ul>
+                    <li>You must be a Kenyan citizen.</li>
+                    <li>You must be at least 18 years of age</li>
+                    <li>You must not have been judged "mentally incompetent" in a court of law.</li>
+                    <li>You must not have been convicted of an election offence during the preceding five years.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="button-container">
+            <a class="submit" href="/vote/bio">
+                CHECK STATUS
+            </a>
+            <a class="submit2" href="/vote/bio">
+                BEGIN REGISTRATION
+            </a>
+            <a class="submit" href="/vote/bio">
+                UPDATE DETAILS
+            </a>
+        </div>
+    </div>
+
+{% endblock %}
