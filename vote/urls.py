@@ -9,4 +9,5 @@ urlpatterns = [
     path('location', views.location, name='location'),
     path('photo', views.photo, name='photo'),
     path('success', views.success, name='success'),
+    path('confirm', views.confirm, name='confirm'),
 ]

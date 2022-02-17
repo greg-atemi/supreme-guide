@@ -21,3 +21,6 @@ def photo(request):
 def success(request):
     return render(request, 'vote/success.html')
 
+
+def confirm(request):
+    return render(request, 'vote/confirmation.html')
