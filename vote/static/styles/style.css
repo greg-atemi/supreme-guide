@@ -239,8 +239,7 @@ html,body{
     border-radius: 8px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     padding: 40px;
-    margin-top: 64px;
-    margin-bottom: 64px;
+    margin-top: 32px;
     background-color: #F1F1F5;
 }
 

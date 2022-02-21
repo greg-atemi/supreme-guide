@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/static/styles/admin_style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>Admin Base</title>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <img id="logo" src="{% static 'images/logo.svg' %}" alt="logo">
+        </div>
+        <div class="link_list">
+            <a href={% url 'vote:admin' %}>
+                <img id="icon" src="{% static 'images/vote_icon.svg' %}" alt="icon">Voters
+            </a>
+            <a href={% url 'vote:admin' %}>
+                <img id="icon" src="{% static 'images/location_icon.svg' %}" alt="icon">Counties
+            </a>
+            <a href={% url 'vote:admin' %}>
+                <img id="icon" src="{% static 'images/location_icon.svg' %}" alt="icon">Constituencies
+            </a>
+            <a href={% url 'vote:admin' %}>
+                <img id="icon" src="{% static 'images/location_icon.svg' %}" alt="icon">Wards
+            </a>
+        </div>
+    </div>
+    <div class="parent">
+
+    </div>
+</body>
+</html>

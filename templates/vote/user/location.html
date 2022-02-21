@@ -1,4 +1,4 @@
-{% extends 'vote/base.html' %}
+{% extends 'vote/user/base.html' %}
 {% load static %}
 {% block title_block %}
     <title>Location Data</title>
@@ -63,13 +63,12 @@
                     </div>
 
                     <div class="button-group">
-                        <a class="submit" href={% url 'vote:bio' %}>BACK</a>
+                        <input type="reset" class="submit" value="CLEAR">
                         <input id="submit2" type="submit" value="SUBMIT"/>
-                        <a class="submit" href={% url 'vote:location' %}>NEXT</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
+<a href={% url 'vote:photo' %}>NEXT</a>
 {% endblock %}

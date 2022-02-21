@@ -1,4 +1,4 @@
-{% extends 'vote/base.html' %}
+{% extends 'vote/user/base.html' %}
 {% load static %}
 {% block title_block %}
     <title>Confirm and Submit</title>
@@ -160,5 +160,5 @@
     </div>
 
 </div>
-
+<a href={% url 'vote:success' %}>NEXT</a>
 {% endblock %}

@@ -1,4 +1,4 @@
-{% extends 'vote/base.html' %}
+{% extends 'vote/user/base.html' %}
 {% load static %}
 {% block title_block %}
     <title>Photo Data</title>
@@ -34,14 +34,12 @@
                         <label for="id_County">Photo</label>
                         <label for="id_County">Click the button below and choose an appropriate portrait image of you</label>
                         <input type="file" class="input" accept="image/*" onchange="loadFile(event)" value="Add Photo">
-                        <img id="output" src="{% static 'images/user.svg' %}"/>
-
-                        <input type="reset" value="Remove Photo">
+                        <img id="output" src="{% static 'images/user.svg' %}" alt="default"/>
 
                     </div>
 
                     <div class="button-group">
-                        <a class="submit" href={% url 'vote:bio' %}>BACK</a>
+                        <a class="submit" href={% url 'vote:photo' %}>RESET</a>
                         <input id="submit2" type="submit" value="SUBMIT"/>
                     </div>
                 </form>
@@ -58,5 +56,5 @@
             }
         };
     </script>
-
+<a href={% url 'vote:confirm' %}>NEXT</a>
 {% endblock %}

@@ -3,24 +3,28 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return render(request, 'vote/index.html')
+    return render(request, 'vote/user/index.html')
 
 
 def bio(request):
-    return render(request, 'vote/bio.html')
+    return render(request, 'vote/user/bio.html')
 
 
 def location(request):
-    return render(request, 'vote/location.html')
+    return render(request, 'vote/user/location.html')
 
 
 def photo(request):
-    return render(request, 'vote/photo.html')
+    return render(request, 'vote/user/photo.html')
 
 
 def success(request):
-    return render(request, 'vote/success.html')
+    return render(request, 'vote/user/success.html')
 
 
 def confirm(request):
-    return render(request, 'vote/confirmation.html')
+    return render(request, 'vote/user/confirmation.html')
+
+
+def admin(request):
+    return render(request, 'vote/admin/admin_base.html')
