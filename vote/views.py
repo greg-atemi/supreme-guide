@@ -26,5 +26,5 @@ def confirm(request):
     return render(request, 'vote/user/confirmation.html')
 
 
-def admin(request):
-    return render(request, 'vote/admin/admin_base.html')
+def voter_list(request):
+    return render(request, 'vote/admin/voter_list.html')

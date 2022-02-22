@@ -53,3 +53,132 @@ html,body{
     height: 25px;
     margin-right: 16px;
 }
+
+body{
+    display: flex;
+}
+
+.parent{
+    width: 80%;
+    background-color: #FBFBFB;
+}
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 16px;
+    font-family: Inter, sans-serif;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    background-color: #FFFFFF;
+}
+
+.navbar div{
+    margin-right: 32px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar img{
+    width: 16px;
+    height: 16px;
+    margin-left: 8px;
+}
+
+.search{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 320px;
+    margin-left: 40px;
+    margin-top: 24px;
+    margin-bottom: 40px;
+    border: 1px solid #4B5563;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.search div{
+    display: flex;
+    font-size: 16px;
+}
+
+.search #search{
+    margin-left: 12px;
+    margin-right: 16px;
+}
+
+.search #dropdown{
+    margin-right: 12px;
+}
+
+.search input{
+    width: 224px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+}
+
+.table{
+    table-layout: auto;
+    border: solid 1px #E5E7EB;
+    border-radius: 8px;
+    border-collapse: collapse;
+    margin-left: 40px;
+    margin-bottom: 40px;
+    width: 80%;
+    background-color: #FFFFFF;
+}
+
+.table-head-row{
+    border-bottom-width: 1px;
+    text-align: left;
+    display: table-row;
+}
+
+.table-row{
+    background-color: white;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 24px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #E5E7EB;
+}
+
+.head-item{
+    text-align: left;
+    color: #6B7280;
+    background-color: #F9FAFB;
+    font-size: 14px;
+    line-height: 20px;
+    padding-top: 12px;
+    padding-left: 24px;
+    padding-bottom: 12px;
+    padding-right: 24px;
+}
+
+.cell{
+    font-size: 14px;
+    line-height: 20px;
+    padding-top: 16px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-bottom: 16px;
+    align-items: center;
+    color: #111827;
+}
+
+.image-cell{
+    padding-top: 24px;
+    padding-bottom: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
+    align-items: center;
+    color: #111827;
+    justify-items: center;
+}

@@ -1,0 +1,67 @@
+{% extends 'vote/admin/admin_base.html' %}
+{% load static %}
+{% block title_block %}
+    <title>Voter List</title>
+{% endblock %}
+
+{% block body_block %}
+    <div class="search">
+        <div>
+            <img id=search src="{% static 'images/search.svg' %}" alt="search">
+            <form>
+                <input type="text" placeholder="Search">
+            </form>
+        </div>
+        <img id="dropdown" src="{% static 'images/dropdown.svg' %}" alt="search">
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr class="table-row">
+                <th class="head-item">ID NUMBER</th>
+                <th class="head-item">NAME</th>
+                <th class="head-item">PHONE NUMBER</th>
+                <th class="head-item">GENDER</th>
+                <th class="head-item">EMAIL</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-row">
+                <td class="cell">36363636</td>
+                <td class="cell">Greg Opati Atemi</td>
+                <td class="cell">0722334477</td>
+                <td class="cell">Male</td>
+                <td class="cell">magrega7180@gmail.com</td>
+            </tr>
+            <tr class="table-row">
+                <td class="cell">36363636</td>
+                <td class="cell">Greg Opati Atemi</td>
+                <td class="cell">0722334477</td>
+                <td class="cell">Male</td>
+                <td class="cell">magrega7180@gmail.com</td>
+            </tr>
+            <tr class="table-row">
+                <td class="cell">36363636</td>
+                <td class="cell">Greg Opati Atemi</td>
+                <td class="cell">0722334477</td>
+                <td class="cell">Male</td>
+                <td class="cell">magrega7180@gmail.com</td>
+            </tr>
+            <tr class="table-row">
+                <td class="cell">36363636</td>
+                <td class="cell">Greg Opati Atemi</td>
+                <td class="cell">0722334477</td>
+                <td class="cell">Male</td>
+                <td class="cell">magrega7180@gmail.com</td>
+            </tr>
+            <tr class="table-row">
+                <td class="cell">36363636</td>
+                <td class="cell">Greg Opati Atemi</td>
+                <td class="cell">0722334477</td>
+                <td class="cell">Male</td>
+                <td class="cell">magrega7180@gmail.com</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

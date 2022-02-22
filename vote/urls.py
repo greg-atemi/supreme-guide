@@ -10,5 +10,5 @@ urlpatterns = [
     path('photo', views.photo, name='photo'),
     path('success', views.success, name='success'),
     path('confirm', views.confirm, name='confirm'),
-    path('admin', views.admin, name='admin'),
+    path('voter_list', views.voter_list, name='voter_list'),
 ]
