@@ -28,3 +28,31 @@ def confirm(request):
 
 def voter_list(request):
     return render(request, 'vote/admin/voter_list.html')
+
+
+def county_list(request):
+    return render(request, 'vote/admin/county_list.html')
+
+
+def constituency_list(request):
+    return render(request, 'vote/admin/constituency_list.html')
+
+
+def ward_list(request):
+    return render(request, 'vote/admin/ward_list.html')
+
+
+def voter_detail(request):
+    return render(request, 'vote/admin/voter_detail.html')
+
+
+def county_detail(request):
+    return render(request, 'vote/admin/county_detail.html')
+
+
+def constituency_detail(request):
+    return render(request, 'vote/admin/constituency_detail.html')
+
+
+def ward_detail(request):
+    return render(request, 'vote/admin/ward_detail.html')

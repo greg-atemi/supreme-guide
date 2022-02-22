@@ -1,0 +1,132 @@
+{% extends 'vote/admin/admin_base.html' %}
+{% load static %}
+{% block title_block %}
+    <title>Voter Detail</title>
+{% endblock %}
+
+{% block body_block %}
+
+    <div class="form">
+        <p>Personal Details</p>
+        <form action="" method="post">
+        {% csrf_token %}
+            <div class="fieldWrapper_group">
+                <div class="fieldWrapper2">
+                    {{ form.subject.errors }}
+                    <label for="id_Engine_no">ID Number</label>
+                    <input class="input" type="text" name="License_plate_no" maxlength="254" required="" id="id_License_plate_no">
+                </div>
+
+                <div class="spacer"></div>
+
+                <div class="fieldWrapper2">
+                    {{ form.subject.errors }}
+                    <label for="id_Constituency">First Name</label>
+                    <input class="input" type="text" name="License_plate_no" maxlength="254" required="" id="id_License_plate_no">
+                </div>
+            </div>
+
+            <div class="fieldWrapper_group">
+                <div class="fieldWrapper2">
+                    {{ form.subject.errors }}
+                    <label for="id_Engine_no">Middle Name</label>
+                    <input class="input" type="text" name="License_plate_no" maxlength="254" required="" id="id_License_plate_no">
+                </div>
+
+                <div class="spacer"></div>
+
+                <div class="fieldWrapper2">
+                    {{ form.subject.errors }}
+                    <label for="id_Constituency">Last Name</label>
+                    <input class="input" type="text" name="License_plate_no" maxlength="254" required="" id="id_License_plate_no">
+                </div>
+            </div>
+
+            <div class="fieldWrapper_group">
+                <div class="fieldWrapper2">
+                    {{ form.subject.errors }}
+                    <label for="id_Engine_no">Phone Number</label>
+                    <input class="input" type="text" name="License_plate_no" maxlength="254" required="" id="id_License_plate_no">
+                </div>
+
+                <div class="spacer"></div>
+
+                <div class="fieldWrapper2">
+                    {{ form.subject.errors }}
+                    <label for="id_Constituency">Gender</label>
+                    <select class="input" name="constituency" required="" id="id_Constituency">
+                        <option value="" selected=""></option>
+                        <option value="648641">Male</option>
+                        <option value="265484">Female</option>
+                        <option value="265484">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="fieldWrapper_group">
+                <div class="short">
+                    {{ form.subject.errors }}
+                    <label for="id_Engine_no">Email Address</label>
+                    <input type="text" name="License_plate_no" maxlength="254" required="" id="id_License_plate_no">
+                </div>
+            </div>
+    </div>
+
+    <div class="form">
+        <p>Location Details</p>
+            <div class="fieldWrapper_group">
+                <div class="fieldWrapper2">
+                    {{ form.subject.errors }}
+                    <label for="id_Constituency">County</label>
+                    <select class="input" name="constituency" required="" id="id_Constituency">
+                        <option value="" selected=""></option>
+                        <option value="648641">Male</option>
+                        <option value="265484">Female</option>
+                        <option value="265484">Other</option>
+                    </select>
+                </div>
+
+                <div class="spacer"></div>
+
+                <div class="fieldWrapper2">
+                    {{ form.subject.errors }}
+                    <label for="id_Constituency">Constituency</label>
+                    <select class="input" name="constituency" required="" id="id_Constituency">
+                        <option value="" selected=""></option>
+                        <option value="648641">Male</option>
+                        <option value="265484">Female</option>
+                        <option value="265484">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="fieldWrapper_group">
+                <div class="short">
+                    {{ form.subject.errors }}
+                    <label for="id_Constituency">Ward</label>
+                    <select class="input" name="constituency" required="" id="id_Constituency">
+                        <option value="" selected=""></option>
+                        <option value="648641">Male</option>
+                        <option value="265484">Female</option>
+                        <option value="265484">Other</option>
+                    </select>
+                </div>
+            </div>
+    </div>
+
+    <div class="form">
+        <p>Photo</p>
+            <div class="fieldWrapper">
+                {{ form.subject.errors }}
+                <img id="output" src="{% static 'images/user.svg' %}" alt="default"/>
+            </div>
+
+    </div>
+
+    <div class="button-group">
+        <input class="submit" type="reset" value="CANCEL CHANGES">
+        <input id="submit2" type="submit" value="SUBMIT"/>
+    </div>
+</form>
+
+{% endblock %}

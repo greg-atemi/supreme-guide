@@ -1,0 +1,67 @@
+{% extends 'vote/admin/admin_base.html' %}
+{% load static %}
+{% block title_block %}
+    <title>Voter List</title>
+{% endblock %}
+
+{% block body_block %}
+    <div class="search">
+        <div>
+            <img id=search src="{% static 'images/search.svg' %}" alt="search">
+            <form>
+                <input type="text" placeholder="Search">
+            </form>
+        </div>
+        <img id="dropdown" src="{% static 'images/dropdown.svg' %}" alt="search">
+    </div>
+
+    <table class="table-long">
+        <thead>
+            <tr class="table-row">
+                <th class="head-item">CODE</th>
+                <th class="head-item">WARD NAME</th>
+                <th class="head-item">NO. OF VOTERS</th>
+                <th class="head-item">CONSTITUENCY</th>
+                <th class="head-item">COUNTY</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-row">
+                <td class="cell">654</td>
+                <td class="cell">Makongeni-Hamza</td>
+                <td class="cell">3000</td>
+                <td class="cell">Makadara</td>
+                <td class="cell">Nairobi</td>
+            </tr>
+            <tr class="table-row">
+                <td class="cell">654</td>
+                <td class="cell">Makongeni-Hamza</td>
+                <td class="cell">3000</td>
+                <td class="cell">Makadara</td>
+                <td class="cell">Nairobi</td>
+            </tr>
+            <tr class="table-row">
+                <td class="cell">654</td>
+                <td class="cell">Makongeni-Hamza</td>
+                <td class="cell">3000</td>
+                <td class="cell">Makadara</td>
+                <td class="cell">Nairobi</td>
+            </tr>
+            <tr class="table-row">
+                <td class="cell">654</td>
+                <td class="cell">Makongeni-Hamza</td>
+                <td class="cell">3000</td>
+                <td class="cell">Makadara</td>
+                <td class="cell">Nairobi</td>
+            </tr>
+            <tr class="table-row">
+                <td class="cell">654</td>
+                <td class="cell">Makongeni-Hamza</td>
+                <td class="cell">3000</td>
+                <td class="cell">Makadara</td>
+                <td class="cell">Nairobi</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

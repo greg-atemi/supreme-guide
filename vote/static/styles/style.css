@@ -254,7 +254,6 @@ html,body{
 .fieldWrapper_group{
     display: flex;
     justify-content: space-between;
-
 }
 
 .fieldWrapper_group p{

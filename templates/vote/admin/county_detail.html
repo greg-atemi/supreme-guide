@@ -1,0 +1,38 @@
+{% extends 'vote/admin/admin_base.html' %}
+{% load static %}
+{% block title_block %}
+    <title>Voter Detail</title>
+{% endblock %}
+
+{% block body_block %}
+
+    <div class="form">
+        <p>County</p>
+        <form action="" method="post">
+        {% csrf_token %}
+            <div class="fieldWrapper_group">
+                <div class="fieldWrapper2">
+                    {{ form.subject.errors }}
+                    <label for="id_Engine_no">County Code</label>
+                    <input class="input" type="text" name="License_plate_no" maxlength="254" required="" id="id_License_plate_no">
+                </div>
+
+                <div class="spacer"></div>
+
+                <div class="fieldWrapper2">
+                    {{ form.subject.errors }}
+                    <label for="id_Constituency">County Name</label>
+                    <input class="input" type="text" name="License_plate_no" maxlength="254" required="" id="id_License_plate_no">
+                </div>
+            </div>
+
+    </div>
+
+    <div class="button-group">
+        <input type="reset" class="submit" value="CANCEL CHANGES">
+        <input id="submit2" type="submit" value="SUBMIT"/>
+    </div>
+
+    </form>
+
+{% endblock %}

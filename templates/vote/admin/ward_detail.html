@@ -1,0 +1,52 @@
+{% extends 'vote/admin/admin_base.html' %}
+{% load static %}
+{% block title_block %}
+    <title>Ward Detail</title>
+{% endblock %}
+
+{% block body_block %}
+
+    <div class="form">
+        <p>Ward</p>
+        <form action="" method="post">
+        {% csrf_token %}
+            <div class="fieldWrapper_group">
+                <div class="fieldWrapper2">
+                    {{ form.subject.errors }}
+                    <label for="id_Engine_no">Ward Code</label>
+                    <input class="input" type="text" name="License_plate_no" maxlength="254" required="" id="id_License_plate_no">
+                </div>
+
+                <div class="spacer"></div>
+
+                <div class="fieldWrapper2">
+                    {{ form.subject.errors }}
+                    <label for="id_Constituency">Ward Name</label>
+                    <input class="input" type="text" name="License_plate_no" maxlength="254" required="" id="id_License_plate_no">
+                </div>
+
+            </div>
+
+            <div class="fieldWrapper_group">
+                <div class="short">
+                    {{ form.subject.errors }}
+                    <label for="id_Constituency">Constituency</label>
+                    <select class="input" name="constituency" required="" id="id_Constituency">
+                        <option value="" selected=""></option>
+                        <option value="648641">Male</option>
+                        <option value="265484">Female</option>
+                        <option value="265484">Other</option>
+                    </select>
+                </div>
+            </div>
+
+    </div>
+
+    <div class="button-group">
+        <input type="reset" class="submit" value="CANCEL CHANGES">
+        <input id="submit2" type="submit" value="SUBMIT"/>
+    </div>
+
+    </form>
+
+{% endblock %}

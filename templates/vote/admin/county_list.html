@@ -1,0 +1,55 @@
+{% extends 'vote/admin/admin_base.html' %}
+{% load static %}
+{% block title_block %}
+    <title>Voter List</title>
+{% endblock %}
+
+{% block body_block %}
+    <div class="search">
+        <div>
+            <img id=search src="{% static 'images/search.svg' %}" alt="search">
+            <form>
+                <input type="text" placeholder="Search">
+            </form>
+        </div>
+        <img id="dropdown" src="{% static 'images/dropdown.svg' %}" alt="search">
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr class="table-row">
+                <th class="head-item">COUNTY CODE</th>
+                <th class="head-item">COUNTY NAME</th>
+                <th class="head-item">NO. OF VOTERS</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-row">
+                <td class="cell">047</td>
+                <td class="cell">Nairobi</td>
+                <td class="cell">2500000</td>
+            </tr>
+            <tr class="table-row">
+                <td class="cell">047</td>
+                <td class="cell">Nairobi</td>
+                <td class="cell">2500000</td>
+            </tr>
+            <tr class="table-row">
+                <td class="cell">047</td>
+                <td class="cell">Nairobi</td>
+                <td class="cell">2500000</td>
+            </tr>
+            <tr class="table-row">
+                <td class="cell">047</td>
+                <td class="cell">Nairobi</td>
+                <td class="cell">2500000</td>
+            </tr>
+            <tr class="table-row">
+                <td class="cell">047</td>
+                <td class="cell">Nairobi</td>
+                <td class="cell">2500000</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

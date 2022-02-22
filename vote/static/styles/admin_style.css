@@ -7,10 +7,15 @@ html,body{
     height:100%;
 }
 
+#spacer{
+    width: 20%;
+}
+
 .sidebar{
     width: 20%;
     height: 100%;
     background-color: #171154;
+    position: fixed;
 }
 
 .sidebar .logo{
@@ -94,7 +99,7 @@ body{
     margin-left: 40px;
     margin-top: 24px;
     margin-bottom: 40px;
-    border: 1px solid #4B5563;
+    border: 1px solid #b3b3b3;
     border-radius: 8px;
     background-color: #FFFFFF;
     padding-top: 4px;
@@ -124,6 +129,17 @@ body{
 }
 
 .table{
+    table-layout: auto;
+    border: solid 1px #E5E7EB;
+    border-radius: 8px;
+    border-collapse: collapse;
+    margin-left: 40px;
+    margin-bottom: 40px;
+    width: 60%;
+    background-color: #FFFFFF;
+}
+
+.table-long{
     table-layout: auto;
     border: solid 1px #E5E7EB;
     border-radius: 8px;
@@ -181,4 +197,172 @@ body{
     align-items: center;
     color: #111827;
     justify-items: center;
+}
+
+.form{
+    margin: 40px;
+    padding: 40px;
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    width: 70%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.form p{
+    font-family: Lato, sans-serif;
+    width: 100%;
+    color: #171154;
+    font-size: 24px;
+    margin-bottom: 32px;
+}
+
+.fieldWrapper_group{
+    display: flex;
+    justify-content: space-between;
+}
+
+.fieldWrapper2{
+    display: flex;
+    width: 60%;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.short{
+    display: flex;
+    width: 48%;
+    flex-direction: column;
+    margin-bottom: 16px;
+    font-family: Lato, sans-serif;
+    border-radius: 6px;
+}
+
+.short input{
+    font-family: Lato, sans-serif;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.short select{
+    font-family: Lato, sans-serif;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.short label{
+    font-family: Lato, sans-serif;
+    width: 40%;
+    margin-bottom: 16px;
+}
+
+.fieldWrapper2 p{
+    font-family: Lato, sans-serif;
+    width: 60%;
+    color: #171154;
+    font-size: 24px;
+    margin-bottom: 40px;
+}
+
+.fieldWrapper2 label{
+    font-family: Lato, sans-serif;
+    width: 40%;
+    margin-bottom: 16px;
+}
+
+.fieldWrapper2 .input{
+    font-family: Lato, sans-serif;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.fieldWrapper2 #output{
+    width: 200px;
+    height: 200px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    margin-top: 64px;
+    margin-bottom: 64px;
+    background-color: #F1F1F5;
+}
+
+.fieldWrapper2 select{
+    font-family: Lato, sans-serif;
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.spacer{
+    width: 48px;
+}
+
+.fieldWrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+.fieldWrapper #output{
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 24px;
+    margin-top: 32px;
+    background-color: #F1F1F5;
+}
+
+.button-group{
+    display: flex;
+    justify-content:space-between;
+    padding-top: 24px;
+    width: 78%;
+    margin: 40px;
+}
+
+.submit{
+    font-size: 16px;
+    padding: 12px 36px;
+    width: auto;
+    height: auto;
+    color: #000000;
+    background-color: #D1CFDD;
+    border: 1px solid #D1D5DB;
+    outline: none;
+    cursor: pointer;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    font-family: Inter, sans-serif;
+}
+
+.submit2, #submit2{
+    font-size: 16px;
+    width: auto;
+    padding: 12px 36px;
+    color: #FFFFFF;
+    background-color: #171154;
+    border: 1px solid #D1D5DB;
+    outline: none;
+    cursor: pointer;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    font-family: Inter, sans-serif;
 }
