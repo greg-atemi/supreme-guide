@@ -67,6 +67,19 @@ html,body{
     font-family: Lato, sans-serif;
 }
 
+.content2{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.content2 div{
+    margin-top: 20px;
+    color: #171154;
+    font-size: 20px;
+    font-family: Lato, sans-serif;
+}
+
 .content-title{
     margin-left: 25%;
     margin-top: 20px;
@@ -471,10 +484,16 @@ html,body{
 }
 
 .content-footer #content{
+    list-style-type: none;
     font-size: 16px;
+    font-family: Open Sans, sans-serif;
+    color: #171154;
+}
+
+.content-footer #content a{
+    text-decoration: none;
     list-style-type: none;
     color: #171154;
-    font-family: Open Sans, sans-serif;
 }
 
 .content-footer #content li{

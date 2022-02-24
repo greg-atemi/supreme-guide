@@ -55,13 +55,13 @@
             </div>
         </div>
         <div class="button-container">
-            <a class="submit" href="/vote/bio">
+            <a class="submit" href={% url 'vote:auth' %}>
                 CHECK STATUS
             </a>
-            <a class="submit2" href="/vote/bio">
+            <a class="submit2" href={% url 'vote:bio' %}>
                 BEGIN REGISTRATION
             </a>
-            <a class="submit" href="/vote/bio">
+            <a class="submit" href={% url 'vote:auth' %}>
                 UPDATE DETAILS
             </a>
         </div>

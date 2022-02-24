@@ -9,7 +9,7 @@ urlpatterns = [
     path('location', views.location, name='location'),
     path('photo', views.photo, name='photo'),
     path('success', views.success, name='success'),
-    path('confirm', views.confirm, name='confirm'),
+    path('confirmation', views.confirmation, name='confirmation'),
     path('voter_list', views.voter_list, name='voter_list'),
     path('voter_detail', views.voter_detail, name='voter_detail'),
     path('county_list', views.county_list, name='county_list'),
@@ -18,4 +18,7 @@ urlpatterns = [
     path('ward_detail', views.ward_detail, name='ward_detail'),
     path('constituency_list', views.constituency_list, name='constituency_list'),
     path('constituency_detail', views.constituency_detail, name='constituency_detail'),
+    path('auth', views.auth, name='auth'),
+    path('auth2', views.auth2, name='auth2'),
+    path('auth3', views.auth3, name='auth3'),
 ]

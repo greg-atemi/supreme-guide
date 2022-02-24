@@ -1,0 +1,27 @@
+{% extends 'vote/user/base.html' %}
+{% load static %}
+{% block title_block %}
+    <title>Authorization</title>
+{% endblock %}
+
+{% block body_block %}
+    <div class="parent2">
+        <div class="content2">
+            <div>
+                Your record does not exist in the system
+            </div>
+        </div>
+
+        <div class="content2">
+            <div>
+                Please click the button below to visit the Homepage
+            </div>
+        </div>
+
+        <div class="button-container">
+            <a class="submit2" href="/">
+                HOMEPAGE
+            </a>
+        </div>
+    </div>
+{% endblock %}

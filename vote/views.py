@@ -22,7 +22,7 @@ def success(request):
     return render(request, 'vote/user/success.html')
 
 
-def confirm(request):
+def confirmation(request):
     return render(request, 'vote/user/confirmation.html')
 
 
@@ -56,3 +56,15 @@ def constituency_detail(request):
 
 def ward_detail(request):
     return render(request, 'vote/admin/ward_detail.html')
+
+
+def auth(request):
+    return render(request, 'vote/user/auth.html')
+
+
+def auth2(request):
+    return render(request, 'vote/user/auth2.html')
+
+
+def auth3(request):
+    return render(request, 'vote/user/auth3.html')

@@ -1,0 +1,44 @@
+{% extends 'vote/user/base.html' %}
+{% load static %}
+{% block title_block %}
+    <title>Authorization</title>
+{% endblock %}
+
+{% block body_block %}
+    <div class="parent2">
+        <div class="title">
+            Update Registration Details
+        </div>
+
+        <div class="content2">
+            <div>
+                To check your registration details, please input your ID Number
+            </div>
+        </div>
+
+        <div class="content2">
+            <div>
+                Please note that submitting false information is punishable by Kenyan law
+            </div>
+        </div>
+
+        <div class="formWrapper">
+            <div class="form">
+                <form action="" method="post">
+                {% csrf_token %}
+                    <div class="fieldWrapper">
+                        {{ form.subject.errors }}
+                        <label for="id_Engine_no">ID Number</label>
+                        <input class="input" type="text" name="License_plate_no" maxlength="10" required="" id="id_License_plate_no">
+                    </div>
+
+                    <div class="button-group">
+                        <input type="reset" class="submit" value="CLEAR">
+                        <input id="submit2" type="submit" value="NEXT"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<a href={% url 'vote:auth2' %}>NEXT</a>
+{% endblock %}

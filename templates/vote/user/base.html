@@ -40,9 +40,9 @@
             <div id="wrapper">
                 <div id="header">Services</div>
                 <ul id="content">
-                    <li>Voter Registration</li>
-                    <li>Check Registration Status</li>
-                    <li>Update Registration</li>
+                    <li><a href={% url 'vote:bio' %}>Voter Registration</a></li>
+                    <li><a href={% url 'vote:auth' %}>Check Registration Status</a></li>
+                    <li><a href={% url 'vote:auth' %}>Update Registration</a></li>
                 </ul>
             </div>
             <div id="bottom-wrapper">
@@ -51,16 +51,15 @@
                         <input placeholder="johndoe@mail.com">
                         <button class="sub-btn">Subscribe</button>
                     </form>
-                <div></div>
             </div>
         </div>
         <div class="content-footer">
             <div id="wrapper">
                 <div id="header">About Us</div>
                 <ul id="content">
-                    <li>Our Vision</li>
-                    <li>Our Mission</li>
-                    <li>Our Leaders</li>
+                    <li><a href="#">Our Vision</a></li>
+                    <li><a href="#">Our Mission</a></li>
+                    <li><a href="#">Our Leaders</a></li>
                 </ul>
             </div>
             <div id="right-bottom-wrapper">
