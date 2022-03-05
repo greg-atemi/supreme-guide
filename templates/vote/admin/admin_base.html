@@ -1,5 +1,4 @@
 {% load static %}
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,6 +14,9 @@
             <img id="logo" src="{% static 'images/logo.svg' %}" alt="logo">
         </div>
         <div class="link_list">
+            <a href={% url 'vote:dashboard' %}>
+                <img id="icon" src="{% static 'images/vote_icon.svg' %}" alt="icon">Dashboard
+            </a>
             <a href={% url 'vote:voter_list' %}>
                 <img id="icon" src="{% static 'images/vote_icon.svg' %}" alt="icon">Voters
             </a>
@@ -36,12 +38,26 @@
         <div class="navbar">
             <div></div>
             <div>
-                Username Username
+                {% if user.is_authenticated %}
+                    Hi, {{ fname }} {{ lname }}
+                {% endif %}
                 <img src="{% static 'images/dropdown.svg' %}" alt="drop">
             </div>
         </div>
 
+        {% for message in messages %}
+            <div role="alert">
+                <strong>Message:</strong> {{ message }}
+                <button type="button" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+        <br>
+        <button type="submit"><a href={% url 'vote:log_out' %}> Logout </a></button>
+        <br>
         {% block body_block %}
+
         {% endblock %}
 
     </div>
