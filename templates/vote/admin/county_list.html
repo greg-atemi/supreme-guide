@@ -24,31 +24,13 @@
             </tr>
         </thead>
         <tbody>
+        {% for county in county %}
             <tr class="table-row">
-                <td class="cell">047</td>
-                <td class="cell">Nairobi</td>
+                <td class="cell">{{ county.county_code }}</td>
+                <td class="cell">{{ county.county_name }}</td>
                 <td class="cell">2500000</td>
             </tr>
-            <tr class="table-row">
-                <td class="cell">047</td>
-                <td class="cell">Nairobi</td>
-                <td class="cell">2500000</td>
-            </tr>
-            <tr class="table-row">
-                <td class="cell">047</td>
-                <td class="cell">Nairobi</td>
-                <td class="cell">2500000</td>
-            </tr>
-            <tr class="table-row">
-                <td class="cell">047</td>
-                <td class="cell">Nairobi</td>
-                <td class="cell">2500000</td>
-            </tr>
-            <tr class="table-row">
-                <td class="cell">047</td>
-                <td class="cell">Nairobi</td>
-                <td class="cell">2500000</td>
-            </tr>
+        {% endfor %}
         </tbody>
     </table>
 

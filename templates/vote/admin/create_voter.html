@@ -6,55 +6,55 @@
 
 {% block body_block %}
 
-    <div class="form">
-        <p>Personal Details</p>
-        <form action="" method="post">
-        {% csrf_token %}
+    <form action="" method="post">
+        <div class="form">
+            <p>Personal Details</p>
+            {% csrf_token %}
             <div class="fieldWrapper_group">
                 <div class="fieldWrapper2">
                     {{ form.subject.errors }}
-                    <label for="id_Engine_no">ID Number</label>
-                    <input class="input" type="text" name="License_plate_no" maxlength="254" required="" id="id_License_plate_no">
+                    <label for="id_serial_number">ID Serial Number</label>
+                    <input class="input" type="text" name="id_serial_number" maxlength="8" id="id_serial_number" required="">
                 </div>
 
                 <div class="spacer"></div>
 
                 <div class="fieldWrapper2">
                     {{ form.subject.errors }}
-                    <label for="id_Constituency">First Name</label>
-                    <input class="input" type="text" name="License_plate_no" maxlength="254" required="" id="id_License_plate_no">
+                    <label for="first_name">First Name</label>
+                    <input class="input" type="text" name="first_name" maxlength="254" id="first_name" required="">
                 </div>
             </div>
 
             <div class="fieldWrapper_group">
                 <div class="fieldWrapper2">
                     {{ form.subject.errors }}
-                    <label for="id_Engine_no">Middle Name</label>
-                    <input class="input" type="text" name="License_plate_no" maxlength="254" required="" id="id_License_plate_no">
+                    <label for="middle_name">Middle Name</label>
+                    <input class="input" type="text" name="middle_name" maxlength="254" required="" id="middle_name">
                 </div>
 
                 <div class="spacer"></div>
 
                 <div class="fieldWrapper2">
                     {{ form.subject.errors }}
-                    <label for="id_Constituency">Last Name</label>
-                    <input class="input" type="text" name="License_plate_no" maxlength="254" required="" id="id_License_plate_no">
+                    <label for="surname">Last Name</label>
+                    <input class="input" type="text" name="surname" maxlength="254" id="surname" required="">
                 </div>
             </div>
 
             <div class="fieldWrapper_group">
                 <div class="fieldWrapper2">
                     {{ form.subject.errors }}
-                    <label for="id_Engine_no">Phone Number</label>
-                    <input class="input" type="text" name="License_plate_no" maxlength="254" required="" id="id_License_plate_no">
+                    <label for="phone_number">Phone Number</label>
+                    <input class="input" type="text" name="phone_number" maxlength="10" id="phone_number" required="">
                 </div>
 
                 <div class="spacer"></div>
 
                 <div class="fieldWrapper2">
                     {{ form.subject.errors }}
-                    <label for="id_Constituency">Gender</label>
-                    <select class="input" name="constituency" required="" id="id_Constituency">
+                    <label for="gender">Gender</label>
+                    <select class="input" name="gender" id="gender" required="">
                         <option value="" selected=""></option>
                         <option value="648641">Male</option>
                         <option value="265484">Female</option>
@@ -66,19 +66,19 @@
             <div class="fieldWrapper_group">
                 <div class="short">
                     {{ form.subject.errors }}
-                    <label for="id_Engine_no">Email Address</label>
-                    <input type="text" name="License_plate_no" maxlength="254" required="" id="id_License_plate_no">
+                    <label for="email">Email Address</label>
+                    <input type="text" name="email" maxlength="254" id="email" required="">
                 </div>
             </div>
-    </div>
+        </div>
 
-    <div class="form">
-        <p>Location Details</p>
+        <div class="form">
+            <p>Location Details</p>
             <div class="fieldWrapper_group">
                 <div class="fieldWrapper2">
                     {{ form.subject.errors }}
-                    <label for="id_Constituency">County</label>
-                    <select class="input" name="constituency" required="" id="id_Constituency">
+                    <label for="county">County</label>
+                    <select class="input" name="county" id="county" required="">
                         <option value="" selected=""></option>
                         <option value="648641">Male</option>
                         <option value="265484">Female</option>
@@ -90,8 +90,8 @@
 
                 <div class="fieldWrapper2">
                     {{ form.subject.errors }}
-                    <label for="id_Constituency">Constituency</label>
-                    <select class="input" name="constituency" required="" id="id_Constituency">
+                    <label for="constituency">Constituency</label>
+                    <select class="input" name="constituency" id="id_Constituency" required="">
                         <option value="" selected=""></option>
                         <option value="648641">Male</option>
                         <option value="265484">Female</option>
@@ -103,8 +103,8 @@
             <div class="fieldWrapper_group">
                 <div class="short">
                     {{ form.subject.errors }}
-                    <label for="id_Constituency">Ward</label>
-                    <select class="input" name="constituency" required="" id="id_Constituency">
+                    <label for="ward">Ward</label>
+                    <select class="input" name="ward" required="" id="ward">
                         <option value="" selected=""></option>
                         <option value="648641">Male</option>
                         <option value="265484">Female</option>
@@ -112,21 +112,21 @@
                     </select>
                 </div>
             </div>
-    </div>
+        </div>
 
-    <div class="form">
-        <p>Photo</p>
+        <div class="form">
+            <p>Photo</p>
             <div class="fieldWrapper">
                 {{ form.subject.errors }}
+                <input class="file" type="file" name="Image" accept="image/*" id="id_Image">
                 <img id="output" src="{% static 'images/user.svg' %}" alt="default"/>
             </div>
+        </div>
 
-    </div>
-
-    <div class="button-group">
-        <input class="submit" type="reset" value="CANCEL CHANGES">
-        <input id="submit2" type="submit" value="SUBMIT"/>
-    </div>
-</form>
+        <div class="button-group">
+            <input class="submit" type="reset" value="CANCEL CHANGES">
+            <input id="submit2" type="submit" value="SUBMIT"/>
+        </div>
+    </form>
 
 {% endblock %}

@@ -3,9 +3,10 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
+from vote.forms import VoterForm, CountyForm
+from vote.models import Voter, County
 
 
 def index(request):
@@ -32,6 +33,30 @@ def signup(request):
         return redirect('vote:login')
 
     return render(request, 'vote/admin/signup.html')
+
+
+def county_detail(request):
+    if request.method == "POST":
+        county_code = request.POST['county_code']
+        county_name = request.POST['county_name']
+
+        mycounty = County.objects.create(county_code=county_code, county_name=county_name)
+        mycounty.county_code = county_code
+        mycounty.county_name = county_name
+
+        mycounty.save()
+
+        messages.success(request, "County added successfully.")
+
+        return redirect('vote:county_list')
+
+    return render(request, 'vote/admin/county_detail.html')
+
+
+def county_list(request):
+    county = County.objects.all()
+    context = {'county': county, }
+    return render(request, 'vote/admin/county_list.html', context)
 
 
 def login(request):
@@ -62,7 +87,6 @@ def login(request):
 def log_out(request):
     logout(request)
     messages.success(request, "You have been Logged Out Successfully!")
-    # return redirect('vote:log_out')
     return render(request, 'vote/admin/logout.html')
 
 
@@ -95,10 +119,6 @@ def voter_list(request):
     return render(request, 'vote/admin/voter_list.html')
 
 
-def county_list(request):
-    return render(request, 'vote/admin/county_list.html')
-
-
 def constituency_list(request):
     return render(request, 'vote/admin/constituency_list.html')
 
@@ -107,12 +127,17 @@ def ward_list(request):
     return render(request, 'vote/admin/ward_list.html')
 
 
-def voter_detail(request):
-    return render(request, 'vote/admin/voter_detail.html')
+@login_required
+def create_voter(request):
+    form = VoterForm()
+    if request.method == 'POST':
+        form = VoterForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = VoterForm()
 
-
-def county_detail(request):
-    return render(request, 'vote/admin/county_detail.html')
+    return render(request, 'vote/admin/create_voter.html', {"form": form})
 
 
 def constituency_detail(request):

@@ -6,32 +6,29 @@
 
 {% block body_block %}
 
-    <div class="form">
-        <p>County</p>
-        <form action="" method="post">
+    <form method="post" action="/vote/county_detail">
         {% csrf_token %}
-            <div class="fieldWrapper_group">
-                <div class="fieldWrapper2">
-                    {{ form.subject.errors }}
-                    <label for="id_Engine_no">County Code</label>
-                    <input class="input" type="text" name="License_plate_no" maxlength="254" required="" id="id_License_plate_no">
+        <div class="form">
+            <p>County</p>
+                <div class="fieldWrapper_group">
+                    <div class="fieldWrapper2">
+                        <label for="id_county_code">County Code</label>
+                        <input class="input" type="text" name="county_code" maxlength="3" id="id_county_code" required>
+                    </div>
+
+                    <div class="spacer"></div>
+
+                    <div class="fieldWrapper2">
+                        <label for="id_county_name">County Name</label>
+                        <input class="input" type="text" name="county_name" maxlength="200" id="id_county_name" required>
+                    </div>
                 </div>
+        </div>
 
-                <div class="spacer"></div>
-
-                <div class="fieldWrapper2">
-                    {{ form.subject.errors }}
-                    <label for="id_Constituency">County Name</label>
-                    <input class="input" type="text" name="License_plate_no" maxlength="254" required="" id="id_License_plate_no">
-                </div>
-            </div>
-
-    </div>
-
-    <div class="button-group">
-        <input type="reset" class="submit" value="CANCEL CHANGES">
-        <input id="submit2" type="submit" value="SUBMIT"/>
-    </div>
+        <div class="button-group">
+            <input type="reset" class="submit" value="CANCEL CHANGES">
+            <input id="submit2" type="submit" value="SUBMIT"/>
+        </div>
 
     </form>
 
