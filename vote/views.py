@@ -5,8 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
-from vote.forms import VoterForm, CountyForm
-from vote.models import Voter, County
+from vote.forms import VoterForm
+from vote.models import County, Constituency, Ward
 
 
 def index(request):
@@ -35,6 +35,35 @@ def signup(request):
     return render(request, 'vote/admin/signup.html')
 
 
+def login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        pass1 = request.POST['pass1']
+
+        user = authenticate(username=username, password=pass1)
+
+        if user is not None:
+            auth_login(request, user)
+            fname = user.first_name
+            lname = user.last_name
+            context = {
+                'fname': fname, 'lname': lname
+            }
+            messages.success(request, "Login Successful.")
+            return render(request, "vote/admin/dashboard.html", context)
+
+        else:
+            messages.error(request, messages.ERROR, "Your Username or Password is incorrect")
+
+    return render(request, 'vote/admin/login.html')
+
+
+def log_out(request):
+    logout(request)
+    messages.success(request, "You have been Logged Out Successfully!")
+    return render(request, 'vote/admin/logout.html')
+
+
 def county_detail(request):
     if request.method == "POST":
         county_code = request.POST['county_code']
@@ -59,35 +88,72 @@ def county_list(request):
     return render(request, 'vote/admin/county_list.html', context)
 
 
-def login(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        pass1 = request.POST['pass1']
+def constituency_detail(request):
+    county = County.objects.all()
+    context = {'county': county}
+    if request.method == "POST":
+        constituency_code = request.POST['constituency_code']
+        constituency_name = request.POST['constituency_name']
+        county_code = request.POST['county_code']
 
-        user = authenticate(username=username, password=pass1)
+        myconstituency = Constituency.objects.create(constituency_code=constituency_code,
+                                                     constituency_name=constituency_name,
+                                                     county_code_id=county_code
+                                                     )
 
-        if user is not None:
-            auth_login(request, user)
-            fname = user.first_name
-            lname = user.last_name
-            context = {
-                'fname': fname, 'lname': lname
-            }
-            messages.success(request, "Login Successful.")
-            # return redirect("/vote/dashboard", context)
-            return render(request, "vote/admin/dashboard.html", context)
+        myconstituency.constituency_code = constituency_code
+        myconstituency.constituency_name = constituency_name
+        myconstituency.county_code_id = county_code
 
-        else:
-            messages.error(request, messages.ERROR, "Your Username or Password is incorrect")
-            # return redirect('/')
+        myconstituency.save()
 
-    return render(request, 'vote/admin/login.html')
+        messages.success(request, "Constituency added successfully.")
+
+        return redirect('vote:constituency_list')
+
+    return render(request, 'vote/admin/constituency_detail.html', context)
 
 
-def log_out(request):
-    logout(request)
-    messages.success(request, "You have been Logged Out Successfully!")
-    return render(request, 'vote/admin/logout.html')
+def constituency_list(request):
+    constituency = Constituency.objects.all()
+    context = {'constituency': constituency, }
+    return render(request, 'vote/admin/constituency_list.html', context)
+
+
+def ward_detail(request):
+    constituency = Constituency.objects.all()
+    context = {'constituency': constituency}
+    if request.method == "POST":
+        ward_code = request.POST['ward_code']
+        ward_name = request.POST['ward_name']
+        constituency_code = request.POST['constituency_code']
+
+        myward = Ward.objects.create(ward_code=ward_code,
+                                     ward_name=ward_name,
+                                     constituency_code_id=constituency_code
+                                     )
+
+        myward.ward_code = ward_code
+        myward.ward_name = ward_name
+        myward.constituency_code_id = constituency_code
+
+        myward.save()
+
+        messages.success(request, "Ward added successfully.")
+
+        return redirect('vote:ward_list')
+
+    return render(request, 'vote/admin/ward_detail.html', context)
+
+
+def ward_list(request):
+    ward = Ward.objects.all()
+    context = {'ward': ward, }
+    return render(request, 'vote/admin/ward_list.html', context)
+
+
+def voter_list(request):
+    return render(request, 'vote/admin/voter_list.html')
 
 
 @login_required
@@ -115,18 +181,6 @@ def confirmation(request):
     return render(request, 'vote/user/confirmation.html')
 
 
-def voter_list(request):
-    return render(request, 'vote/admin/voter_list.html')
-
-
-def constituency_list(request):
-    return render(request, 'vote/admin/constituency_list.html')
-
-
-def ward_list(request):
-    return render(request, 'vote/admin/ward_list.html')
-
-
 @login_required
 def create_voter(request):
     form = VoterForm()
@@ -138,14 +192,6 @@ def create_voter(request):
         form = VoterForm()
 
     return render(request, 'vote/admin/create_voter.html', {"form": form})
-
-
-def constituency_detail(request):
-    return render(request, 'vote/admin/constituency_detail.html')
-
-
-def ward_detail(request):
-    return render(request, 'vote/admin/ward_detail.html')
 
 
 def auth(request):

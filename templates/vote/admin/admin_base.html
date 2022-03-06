@@ -24,13 +24,19 @@
                 <img id="icon" src="{% static 'images/location_icon.svg' %}" alt="icon">Counties
             </a>
             <a href={% url 'vote:county_detail' %}>
-                <img id="icon" src="{% static 'images/location_icon.svg' %}" alt="icon">County Detail
+                <img id="icon" src="{% static 'images/location_icon.svg' %}" alt="icon">Add County
             </a>
             <a href={% url 'vote:constituency_list' %}>
                 <img id="icon" src="{% static 'images/location_icon.svg' %}" alt="icon">Constituencies
             </a>
+            <a href={% url 'vote:constituency_detail' %}>
+                <img id="icon" src="{% static 'images/location_icon.svg' %}" alt="icon">Add Constituency
+            </a>
             <a href={% url 'vote:ward_list' %}>
                 <img id="icon" src="{% static 'images/location_icon.svg' %}" alt="icon">Wards
+            </a>
+            <a href={% url 'vote:ward_detail' %}>
+                <img id="icon" src="{% static 'images/location_icon.svg' %}" alt="icon">Add Ward
             </a>
         </div>
     </div>

@@ -26,41 +26,15 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="table-row">
-                <td class="cell">654</td>
-                <td class="cell">Makongeni-Hamza</td>
-                <td class="cell">3000</td>
-                <td class="cell">Makadara</td>
-                <td class="cell">Nairobi</td>
-            </tr>
-            <tr class="table-row">
-                <td class="cell">654</td>
-                <td class="cell">Makongeni-Hamza</td>
-                <td class="cell">3000</td>
-                <td class="cell">Makadara</td>
-                <td class="cell">Nairobi</td>
-            </tr>
-            <tr class="table-row">
-                <td class="cell">654</td>
-                <td class="cell">Makongeni-Hamza</td>
-                <td class="cell">3000</td>
-                <td class="cell">Makadara</td>
-                <td class="cell">Nairobi</td>
-            </tr>
-            <tr class="table-row">
-                <td class="cell">654</td>
-                <td class="cell">Makongeni-Hamza</td>
-                <td class="cell">3000</td>
-                <td class="cell">Makadara</td>
-                <td class="cell">Nairobi</td>
-            </tr>
-            <tr class="table-row">
-                <td class="cell">654</td>
-                <td class="cell">Makongeni-Hamza</td>
-                <td class="cell">3000</td>
-                <td class="cell">Makadara</td>
-                <td class="cell">Nairobi</td>
-            </tr>
+            {% for ward in ward %}
+                <tr class="table-row">
+                    <td class="cell">{{ ward.ward_code }}</td>
+                    <td class="cell">{{ ward.ward_name }}</td>
+                    <td class="cell">65000</td>
+                    <td class="cell">{{ ward.constituency_code }}</td>
+                    <td class="cell">{{ ward.constituency_code.county_code }}</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 

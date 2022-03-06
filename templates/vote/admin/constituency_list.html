@@ -25,36 +25,14 @@
             </tr>
         </thead>
         <tbody>
+        {% for constituency in constituency %}
             <tr class="table-row">
-                <td class="cell">233</td>
-                <td class="cell">Langata</td>
+                <td class="cell">{{ constituency.constituency_code }}</td>
+                <td class="cell">{{ constituency.constituency_name }}</td>
                 <td class="cell">65000</td>
-                <td class="cell">Nairobi</td>
+                <td class="cell">{{ constituency.county_code }}</td>
             </tr>
-            <tr class="table-row">
-                <td class="cell">233</td>
-                <td class="cell">Langata</td>
-                <td class="cell">65000</td>
-                <td class="cell">Nairobi</td>
-            </tr>
-            <tr class="table-row">
-                <td class="cell">233</td>
-                <td class="cell">Langata</td>
-                <td class="cell">65000</td>
-                <td class="cell">Nairobi</td>
-            </tr>
-            <tr class="table-row">
-                <td class="cell">233</td>
-                <td class="cell">Langata</td>
-                <td class="cell">65000</td>
-                <td class="cell">Nairobi</td>
-            </tr>
-            <tr class="table-row">
-                <td class="cell">233</td>
-                <td class="cell">Langata</td>
-                <td class="cell">65000</td>
-                <td class="cell">Nairobi</td>
-            </tr>
+        {% endfor %}
         </tbody>
     </table>
 

@@ -6,36 +6,33 @@
 
 {% block body_block %}
 
-    <div class="form">
-        <p>Ward</p>
-        <form action="" method="post">
+    <form method="post" action="/vote/ward_detail">
         {% csrf_token %}
+        <div class="form">
+            <p>Ward</p>
             <div class="fieldWrapper_group">
                 <div class="fieldWrapper2">
-                    {{ form.subject.errors }}
-                    <label for="id_Engine_no">Ward Code</label>
-                    <input class="input" type="text" name="License_plate_no" maxlength="254" required="" id="id_License_plate_no">
+                    <label for="id_ward_code">Ward Code</label>
+                    <input class="input" type="text" name="ward_code" maxlength="8" id="id_ward_code" required>
                 </div>
 
                 <div class="spacer"></div>
 
                 <div class="fieldWrapper2">
-                    {{ form.subject.errors }}
-                    <label for="id_Constituency">Ward Name</label>
-                    <input class="input" type="text" name="License_plate_no" maxlength="254" required="" id="id_License_plate_no">
+                    <label for="id_ward_name">Ward Name</label>
+                    <input class="input" type="text" name="ward_name" maxlength="254" id="id_ward_name" required>
                 </div>
 
             </div>
 
             <div class="fieldWrapper_group">
                 <div class="short">
-                    {{ form.subject.errors }}
-                    <label for="id_Constituency">Constituency</label>
-                    <select class="input" name="constituency" required="" id="id_Constituency">
+                    <label for="id_constituency_code">Constituency</label>
+                    <select class="input" name="constituency_code" id="id_constituency_code" required>
                         <option value="" selected=""></option>
-                        <option value="648641">Male</option>
-                        <option value="265484">Female</option>
-                        <option value="265484">Other</option>
+                        {% for constituency in constituency %}
+                            <option value={{ constituency.constituency_code }}>{{ constituency.constituency_name }}</option>
+                        {% endfor %}
                     </select>
                 </div>
             </div>
