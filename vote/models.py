@@ -3,7 +3,7 @@ from django.db import models
 
 
 class County(models.Model):
-    county_code = models.TextField(max_length=255, primary_key=True)
+    county_code = models.CharField(max_length=255, primary_key=True, default="")
     county_name = models.CharField(max_length=200)
 
     def __str__(self):
@@ -13,7 +13,7 @@ class County(models.Model):
 class Constituency(models.Model):
     constituency_code = models.CharField(max_length=8, primary_key=True)
     constituency_name = models.CharField(max_length=200)
-    county_code = models.ForeignKey(County, on_delete=models.CASCADE)
+    county_code = models.ForeignKey(County, on_delete=models.CASCADE, default="")
 
     def __str__(self):
         return self.constituency_name

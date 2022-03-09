@@ -6,7 +6,15 @@
 </head>
 <body>
     <h1> Login </h1>
-
+    {% for message in messages %}
+        <div role="alert">
+            <strong>Message:</strong> {{ message }}
+            <button type="button" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <br>
+    {% endfor %}
     <form method="post" action="/vote/login">
     {% csrf_token %}
         <label for="username"> Username </label>

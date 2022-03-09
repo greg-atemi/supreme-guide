@@ -18,7 +18,7 @@
     <table class="table-long">
         <thead>
             <tr class="table-row">
-                <th class="head-item">ID NUMBER</th>
+                <th class="head-item">ID SERIAL NUMBER</th>
                 <th class="head-item">NAME</th>
                 <th class="head-item">PHONE NUMBER</th>
                 <th class="head-item">GENDER</th>
@@ -26,41 +26,20 @@
             </tr>
         </thead>
         <tbody>
+        {% for voter in voter %}
             <tr class="table-row">
-                <td class="cell">36363636</td>
-                <td class="cell">Greg Opati Atemi</td>
-                <td class="cell">0722334477</td>
-                <td class="cell">Male</td>
-                <td class="cell">magrega7180@gmail.com</td>
+                <td class="cell">{{ voter.id_serial_number }}</td>
+                <td class="cell">{{ voter.first_name }} {{ voter.middle_name }} {{ voter.surname }}</td>
+                <td class="cell">{{ voter.phone_number }}</td>
+                <td class="cell">{{ voter.gender }}</td>
+                <td class="cell">{{ voter.email.email }}</td>
+<!--
+                <td class="image-cell">
+                    <img class="image" src="{{ voter.photo.url }}" alt="photo">
+                </td>
+-->
             </tr>
-            <tr class="table-row">
-                <td class="cell">36363636</td>
-                <td class="cell">Greg Opati Atemi</td>
-                <td class="cell">0722334477</td>
-                <td class="cell">Male</td>
-                <td class="cell">magrega7180@gmail.com</td>
-            </tr>
-            <tr class="table-row">
-                <td class="cell">36363636</td>
-                <td class="cell">Greg Opati Atemi</td>
-                <td class="cell">0722334477</td>
-                <td class="cell">Male</td>
-                <td class="cell">magrega7180@gmail.com</td>
-            </tr>
-            <tr class="table-row">
-                <td class="cell">36363636</td>
-                <td class="cell">Greg Opati Atemi</td>
-                <td class="cell">0722334477</td>
-                <td class="cell">Male</td>
-                <td class="cell">magrega7180@gmail.com</td>
-            </tr>
-            <tr class="table-row">
-                <td class="cell">36363636</td>
-                <td class="cell">Greg Opati Atemi</td>
-                <td class="cell">0722334477</td>
-                <td class="cell">Male</td>
-                <td class="cell">magrega7180@gmail.com</td>
-            </tr>
+        {% endfor %}
         </tbody>
     </table>
 

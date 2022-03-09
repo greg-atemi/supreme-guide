@@ -91,6 +91,14 @@ body{
     margin-left: 8px;
 }
 
+.tab{
+
+}
+
+.tab-large{
+
+}
+
 .search{
     display: flex;
     justify-content: space-between;
@@ -197,6 +205,10 @@ body{
     align-items: center;
     color: #111827;
     justify-items: center;
+}
+
+.image{
+    height: 100px;
 }
 
 .form{

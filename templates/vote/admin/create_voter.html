@@ -12,15 +12,13 @@
             {% csrf_token %}
             <div class="fieldWrapper_group">
                 <div class="fieldWrapper2">
-                    {{ form.subject.errors }}
                     <label for="id_serial_number">ID Serial Number</label>
-                    <input class="input" type="text" name="id_serial_number" maxlength="8" id="id_serial_number" required="">
+                    <input class="input" type="text" name="id_serial_number" maxlength="8" id="id_serial_number" required>
                 </div>
 
                 <div class="spacer"></div>
 
                 <div class="fieldWrapper2">
-                    {{ form.subject.errors }}
                     <label for="first_name">First Name</label>
                     <input class="input" type="text" name="first_name" maxlength="254" id="first_name" required="">
                 </div>
@@ -28,7 +26,6 @@
 
             <div class="fieldWrapper_group">
                 <div class="fieldWrapper2">
-                    {{ form.subject.errors }}
                     <label for="middle_name">Middle Name</label>
                     <input class="input" type="text" name="middle_name" maxlength="254" required="" id="middle_name">
                 </div>
@@ -36,7 +33,6 @@
                 <div class="spacer"></div>
 
                 <div class="fieldWrapper2">
-                    {{ form.subject.errors }}
                     <label for="surname">Last Name</label>
                     <input class="input" type="text" name="surname" maxlength="254" id="surname" required="">
                 </div>
@@ -44,7 +40,6 @@
 
             <div class="fieldWrapper_group">
                 <div class="fieldWrapper2">
-                    {{ form.subject.errors }}
                     <label for="phone_number">Phone Number</label>
                     <input class="input" type="text" name="phone_number" maxlength="10" id="phone_number" required="">
                 </div>
@@ -52,22 +47,20 @@
                 <div class="spacer"></div>
 
                 <div class="fieldWrapper2">
-                    {{ form.subject.errors }}
                     <label for="gender">Gender</label>
-                    <select class="input" name="gender" id="gender" required="">
+                    <select class="input" name="gender" id="gender" required>
                         <option value="" selected=""></option>
-                        <option value="648641">Male</option>
-                        <option value="265484">Female</option>
-                        <option value="265484">Other</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
                     </select>
                 </div>
             </div>
 
             <div class="fieldWrapper_group">
                 <div class="short">
-                    {{ form.subject.errors }}
                     <label for="email">Email Address</label>
-                    <input type="text" name="email" maxlength="254" id="email" required="">
+                    <input type="text" name="email" maxlength="254" id="email" required>
                 </div>
             </div>
         </div>
@@ -76,39 +69,36 @@
             <p>Location Details</p>
             <div class="fieldWrapper_group">
                 <div class="fieldWrapper2">
-                    {{ form.subject.errors }}
                     <label for="county">County</label>
-                    <select class="input" name="county" id="county" required="">
+                    <select class="input" name="county" id="county" required>
                         <option value="" selected=""></option>
-                        <option value="648641">Male</option>
-                        <option value="265484">Female</option>
-                        <option value="265484">Other</option>
+                        {% for county in county %}
+                            <option value={{ county.county_code }}>{{ county.county_name }}</option>
+                        {% endfor %}
                     </select>
                 </div>
 
                 <div class="spacer"></div>
 
                 <div class="fieldWrapper2">
-                    {{ form.subject.errors }}
                     <label for="constituency">Constituency</label>
-                    <select class="input" name="constituency" id="id_Constituency" required="">
+                    <select class="input" name="constituency" id="constituency" required="">
                         <option value="" selected=""></option>
-                        <option value="648641">Male</option>
-                        <option value="265484">Female</option>
-                        <option value="265484">Other</option>
+                        {% for constituency in constituency %}
+                            <option value={{ constituency.county_code }}>{{ constituency.constituency_name }}</option>
+                        {% endfor %}
                     </select>
                 </div>
             </div>
 
             <div class="fieldWrapper_group">
                 <div class="short">
-                    {{ form.subject.errors }}
-                    <label for="ward">Ward</label>
-                    <select class="input" name="ward" required="" id="ward">
+                    <label for="ward_code">Ward</label>
+                    <select class="input" name="ward_code" id="ward_code" required>
                         <option value="" selected=""></option>
-                        <option value="648641">Male</option>
-                        <option value="265484">Female</option>
-                        <option value="265484">Other</option>
+                        {% for ward in ward %}
+                            <option value={{ ward.ward_code }}>{{ ward.ward_name }}</option>
+                        {% endfor %}
                     </select>
                 </div>
             </div>
@@ -117,8 +107,7 @@
         <div class="form">
             <p>Photo</p>
             <div class="fieldWrapper">
-                {{ form.subject.errors }}
-                <input class="file" type="file" name="Image" accept="image/*" id="id_Image">
+                <input class="file" type="file" name="image" accept="image/*" id="image">
                 <img id="output" src="{% static 'images/user.svg' %}" alt="default"/>
             </div>
         </div>

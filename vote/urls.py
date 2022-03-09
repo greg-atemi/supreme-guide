@@ -1,5 +1,6 @@
+from django.conf.urls.static import static
+from django.conf import settings
 from django.urls import path
-
 from . import views
 
 app_name = 'vote'
@@ -26,3 +27,5 @@ urlpatterns = [
     path('login', views.login, name='login'),
     path('log_out', views.log_out, name='log_out')
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
