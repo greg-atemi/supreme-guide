@@ -34,14 +34,14 @@ html,body{
     align-items: center;
     color: #FFFFFF;
     text-decoration: none;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding-top: 8px;
+    padding-bottom: 8px;
     margin-left: 16px;
     margin-right: 8px;
     border-radius: 4px;
     margin-bottom: 8px;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .sidebar #logo{
@@ -91,12 +91,50 @@ body{
     margin-left: 8px;
 }
 
-.tab{
+.tab-group{
+    display: flex;
+    margin-left: 64px;
+    margin-bottom: 40px;
+}
 
+.tab{
+    background-color: #FFFFFF;
+    font-size: 16px;
+    font-family: Inter, sans-serif;
+    padding-left: 24px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    width: 240px;
+    margin-right: 40px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
+}
+
+.tab span{
+    font-size: 36px;
+    margin-bottom: 8px;
+    font-family: Inter, sans-serif;
+    display: block;
 }
 
 .tab-large{
+    background-color: #FFFFFF;
+    width: 320px;
+    font-size: 16px;
+    font-family: Inter, sans-serif;
+    padding-left: 24px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    margin-right: 40px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
+}
 
+.tab-large span{
+    font-size: 36px;
+    margin-bottom: 8px;
+    font-family: Inter, sans-serif;
+    display: block;
 }
 
 .search{

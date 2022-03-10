@@ -5,11 +5,50 @@
 {% endblock %}
 
 {% block body_block %}
+    <div class="tab-group">
+        <div class="tab">
+            <span>{{ total }}</span>
+            Registered Voters
+        </div>
 
-    <div class="tab">
-        2.4M
-        Registered Voters
+        <div class="tab">
+            <span>10</span>
+            Targeted Voters
+        </div>
+
+        <div class="tab">
+            <span>{{ threshold }} %</span>
+            Threshold
+        </div>
     </div>
 
+    <div class="tab-group">
+        <div class="tab">
+            <span>256</span>
+            Days to Election
+        </div>
+
+        <div class="tab">
+            <span>0</span>
+            Voters registered today
+        </div>
+
+        <div class="tab">
+            <span>2</span>
+            Voters registered this month
+        </div>
+    </div>
+
+    <div class="tab-group">
+        <div class="tab">
+            <span>24</span>
+            Most voters in one county
+        </div>
+
+        <div class="tab-large">
+            <span>Nairobi</span>
+            County with the most registered voters
+        </div>
+    </div>
 {% endblock %}
 

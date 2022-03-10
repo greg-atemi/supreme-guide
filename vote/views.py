@@ -4,7 +4,6 @@ from django.contrib.auth import logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
-from vote.forms import VoterForm
 from vote.models import County, Constituency, Ward, Voter
 
 
@@ -60,10 +59,12 @@ def log_out(request):
 
 def dashboard(request):
     if request.user.is_authenticated:
+        total = Voter.objects.count()
+        threshold = (total / 10)*100
         fname = request.user.first_name
         lname = request.user.last_name
         context = {
-            'fname': fname, 'lname': lname
+            'fname': fname, 'lname': lname, 'total': total, 'threshold': threshold
         }
     else:
         messages.info(request, "Login to continue")
@@ -73,92 +74,155 @@ def dashboard(request):
 
 
 def county_detail(request):
-    if request.method == "POST":
-        county_code = request.POST['county_code']
-        county_name = request.POST['county_name']
+    if request.user.is_authenticated:
+        fname = request.user.first_name
+        lname = request.user.last_name
+        context = {
+            'fname': fname,
+            'lname': lname
+        }
+        if request.method == "POST":
+            county_code = request.POST['county_code']
+            county_name = request.POST['county_name']
 
-        mycounty = County.objects.create(county_code=county_code, county_name=county_name)
-        mycounty.county_code = county_code
-        mycounty.county_name = county_name
+            mycounty = County.objects.create(county_code=county_code, county_name=county_name)
+            mycounty.county_code = county_code
+            mycounty.county_name = county_name
 
-        mycounty.save()
+            mycounty.save()
 
-        messages.success(request, "County added successfully.")
+            messages.success(request, "County added successfully.")
 
-        return redirect('vote:county_list')
+            return redirect('vote:county_list')
+    else:
+        messages.info(request, "Login to continue")
+        return redirect('vote:login')
 
-    return render(request, 'vote/admin/county_detail.html')
+    return render(request, 'vote/admin/county_detail.html', context)
 
 
 def county_list(request):
-    county = County.objects.all()
-    context = {'county': county, }
+    if request.user.is_authenticated:
+        county = County.objects.all()
+        fname = request.user.first_name
+        lname = request.user.last_name
+        context = {
+            'fname': fname,
+            'lname': lname,
+            'county': county
+        }
+    else:
+        messages.info(request, "Login to continue")
+        return redirect('vote:login')
+
     return render(request, 'vote/admin/county_list.html', context)
 
 
 def constituency_detail(request):
-    county = County.objects.all()
-    context = {
-        'county': county
-    }
-    if request.method == "POST":
-        constituency_code = request.POST['constituency_code']
-        constituency_name = request.POST['constituency_name']
-        county_code = request.POST['county_code']
+    if request.user.is_authenticated:
+        county = County.objects.all()
+        fname = request.user.first_name
+        lname = request.user.last_name
+        context = {
+            'county': county,
+            'fname': fname,
+            'lname': lname
+        }
+        if request.method == "POST":
+            constituency_code = request.POST['constituency_code']
+            constituency_name = request.POST['constituency_name']
+            county_code = request.POST['county_code']
 
-        myconstituency = Constituency.objects.create(constituency_code=constituency_code,
-                                                     constituency_name=constituency_name,
-                                                     county_code_id=county_code
-                                                     )
+            myconstituency = Constituency.objects.create(constituency_code=constituency_code,
+                                                         constituency_name=constituency_name,
+                                                         county_code_id=county_code
+                                                         )
 
-        myconstituency.constituency_code = constituency_code
-        myconstituency.constituency_name = constituency_name
-        myconstituency.county_code_id = county_code
+            myconstituency.constituency_code = constituency_code
+            myconstituency.constituency_name = constituency_name
+            myconstituency.county_code_id = county_code
 
-        myconstituency.save()
+            myconstituency.save()
 
-        messages.success(request, "Constituency added successfully.")
+            messages.success(request, "Constituency added successfully.")
 
-        return redirect('vote:constituency_list')
+            return redirect('vote:constituency_list')
+
+    else:
+        messages.info(request, "Login to continue")
+        return redirect('vote:login')
 
     return render(request, 'vote/admin/constituency_detail.html', context)
 
 
 def constituency_list(request):
-    constituency = Constituency.objects.all()
-    context = {'constituency': constituency, }
+    if request.user.is_authenticated:
+        fname = request.user.first_name
+        lname = request.user.last_name
+        constituency = Constituency.objects.all()
+        context = {
+            'constituency': constituency,
+            'fname': fname,
+            'lname': lname
+            }
+    else:
+        messages.info(request, "Login to continue")
+        return redirect('vote:login')
+
     return render(request, 'vote/admin/constituency_list.html', context)
 
 
 def ward_detail(request):
-    constituency = Constituency.objects.all()
-    context = {'constituency': constituency}
-    if request.method == "POST":
-        ward_code = request.POST['ward_code']
-        ward_name = request.POST['ward_name']
-        constituency_code = request.POST['constituency_code']
+    if request.user.is_authenticated:
+        fname = request.user.first_name
+        lname = request.user.last_name
+        constituency = Constituency.objects.all()
+        context = {
+            'constituency': constituency,
+            'fname': fname,
+            'lname': lname
+        }
+        if request.method == "POST":
+            ward_code = request.POST['ward_code']
+            ward_name = request.POST['ward_name']
+            constituency_code = request.POST['constituency_code']
 
-        myward = Ward.objects.create(ward_code=ward_code,
-                                     ward_name=ward_name,
-                                     constituency_code_id=constituency_code
-                                     )
+            myward = Ward.objects.create(ward_code=ward_code,
+                                         ward_name=ward_name,
+                                         constituency_code_id=constituency_code
+                                         )
 
-        myward.ward_code = ward_code
-        myward.ward_name = ward_name
-        myward.constituency_code_id = constituency_code
+            myward.ward_code = ward_code
+            myward.ward_name = ward_name
+            myward.constituency_code_id = constituency_code
 
-        myward.save()
+            myward.save()
 
-        messages.success(request, "Ward added successfully.")
+            messages.success(request, "Ward added successfully.")
 
-        return redirect('vote:ward_list')
+            return redirect('vote:ward_list')
+
+    else:
+        messages.info(request, "Login to continue")
+        return redirect('vote:login')
 
     return render(request, 'vote/admin/ward_detail.html', context)
 
 
 def ward_list(request):
-    ward = Ward.objects.all()
-    context = {'ward': ward, }
+    if request.user.is_authenticated:
+        fname = request.user.first_name
+        lname = request.user.last_name
+        ward = Ward.objects.all()
+        context = {
+            'ward': ward,
+            'fname': fname,
+            'lname': lname
+            }
+    else:
+        messages.info(request, "Login to continue")
+        return redirect('vote:login')
+
     return render(request, 'vote/admin/ward_list.html', context)
 
 
@@ -184,13 +248,17 @@ def confirmation(request):
 
 def create_voter(request):
     if request.user.is_authenticated:
+        fname = request.user.first_name
+        lname = request.user.last_name
         ward = Ward.objects.all()
         county = County.objects.all()
         constituency = Constituency.objects.all()
         context = {
             'ward': ward,
             'county': county,
-            'constituency': constituency
+            'constituency': constituency,
+            'fname': fname,
+            'lname': lname
         }
         if request.method == "POST":
             id_serial_number = request.POST['id_serial_number']
@@ -221,11 +289,15 @@ def create_voter(request):
 
 def voter_list(request):
     if request.user.is_authenticated:
+        fname = request.user.first_name
+        lname = request.user.last_name
         voter = Voter.objects.all()
         user = User.objects.all()
         context = {
             'voter': voter,
-            'user': user
+            'user': user,
+            'fname': fname,
+            'lname': lname
         }
     else:
         messages.info(request, "Login to continue")
