@@ -1,10 +1,17 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import send_mail, EmailMessage
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
 from vote.models import County, Constituency, Ward, Voter
+from KuraProject import settings
+from vote.tokens import generate_token
 
 
 def index(request):
@@ -20,13 +27,68 @@ def signup(request):
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
 
+        if User.objects.filter(username=username):
+            messages.error(request, "Username already exists!!")
+            return redirect('vote:signup')
+
+        if User.objects.filter(email=email):
+            messages.error(request, "Email already exists!!")
+            return redirect('vote:signup')
+
+        if pass1 != pass2:
+            messages.error(request, "Passwords do not match")
+            return redirect('vote:signup')
+
+        if not pass1.isalnum():
+            messages.error(request, "Password must contain both letters and numbers")
+            return redirect('vote:signup')
+
+        if len(pass1) < 7:
+            messages.error(request, "Password must contain at least 8 characters")
+            return redirect('vote:signup')
+
         myuser = User.objects.create_user(username, email, pass1)
         myuser.first_name = fname
         myuser.last_name = lname
+        myuser.is_active = False
 
         myuser.save()
 
-        messages.success(request, "Your Account has been created successfully.")
+        messages.success(request, "Your Account has been created successfully. \n ")
+        messages.success(request, "We have sent you a confirmation link to your email. \n ")
+        messages.success(request, "Please click on it to activate your account. \n ")
+
+        # Welcome Email
+
+        subject = "Welcome to Kura Electronic Voter Registration System"
+        message = "Hello " + myuser.first_name + "\n Welcome to Kura Electronic Voter Registration System| \n Thank " \
+                                                 "you for visiting our website \n We have sent you a confirmation " \
+                                                 "email, please confirm your email address in order to activate your " \
+                                                 "account. \n\n Thank You \n Greg Atemi "
+        from_email = settings.EMAIL_HOST_USER
+        to_list = [
+            myuser.email
+        ]
+        send_mail(subject, message, from_email, to_list, fail_silently=False)
+
+        # Email Address Confirmation Email
+
+        current_site = get_current_site(request)
+        email_subject = "Confirm your email"
+        message2 = render_to_string("vote/admin/email_confirmation.html", {
+            'name': myuser.first_name,
+            'domain': current_site.domain,
+            'uid': urlsafe_base64_encode(force_bytes(myuser.pk)),
+            'token': generate_token.make_token(myuser)
+        })
+        email = EmailMessage(
+            email_subject,
+            message2,
+            settings.EMAIL_HOST_USER,
+            [myuser.email],
+        )
+        email.fail_silently = False
+        email.send()
 
         return redirect('vote:login')
 
@@ -53,14 +115,33 @@ def login(request):
 
 def log_out(request):
     logout(request)
-    messages.success(request, "You have been Logged Out Successfully!")
     return render(request, 'vote/admin/logout.html')
+
+
+def activate(request, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        myuser = User.objects.get(pk=uid)
+
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        myuser = None
+
+    if myuser is not None and generate_token.check_token(myuser, token):
+        myuser.is_active = True
+        myuser.save()
+        return redirect('vote:login')
+    else:
+        return render(request, 'vote/admin/activation_failed.html')
+
+
+def activation_failed(request):
+    return render(request, 'vote/admin/activation_failed.html')
 
 
 def dashboard(request):
     if request.user.is_authenticated:
         total = Voter.objects.count()
-        threshold = (total / 10)*100
+        threshold = (total / 10) * 100
         fname = request.user.first_name
         lname = request.user.last_name
         context = {
@@ -164,7 +245,7 @@ def constituency_list(request):
             'constituency': constituency,
             'fname': fname,
             'lname': lname
-            }
+        }
     else:
         messages.info(request, "Login to continue")
         return redirect('vote:login')
@@ -218,7 +299,7 @@ def ward_list(request):
             'ward': ward,
             'fname': fname,
             'lname': lname
-            }
+        }
     else:
         messages.info(request, "Login to continue")
         return redirect('vote:login')

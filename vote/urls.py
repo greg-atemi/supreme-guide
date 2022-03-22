@@ -25,7 +25,9 @@ urlpatterns = [
     path('auth3', views.auth3, name='auth3'),
     path('signup', views.signup, name='signup'),
     path('login', views.login, name='login'),
-    path('log_out', views.log_out, name='log_out')
+    path('log_out', views.log_out, name='log_out'),
+    path('activate/<uidb64>/<token>', views.activate, name='activate'),
+    path('activation_failed', views.activation_failed, name='activation_failed')
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

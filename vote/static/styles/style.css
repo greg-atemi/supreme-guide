@@ -507,3 +507,12 @@ html,body{
     margin-top: 32px;
     position: absolute;
 }
+
+.account{
+    text-decoration: none;
+    color: #000000;
+    font-size: 16px;
+    padding: 6px 13px;
+    font-family: Helvetica, sans-serif;
+    cursor: pointer;
+}

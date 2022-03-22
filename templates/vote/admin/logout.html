@@ -1,22 +1,24 @@
+{% extends 'vote/admin/auth_base.html' %}
+{% load static %}
+{% block title_block %}
+    <title>Logout</title>
+{% endblock %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Authentication</title>
-</head>
-<body>
-    {% for message in messages %}
-        <div role="alert">
-            <strong>Message:</strong> {{ message }}
-            <button type="button" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    {% endfor %}
-    <br>
-    <br>
-    <button type="submit"><a href={% url 'vote:login' %}> Login </a></button>
-    <button type="submit"><a href={% url 'vote:signup' %}> Signup </a></button>
 
-</body>
-</html>
+{% block body_block %}
+    <body>
+        <div class="form-narrow">
+            <form>
+                <h1>YOU HAVE BEEN LOGGED OUT SUCCESSFULLY!</h1>
+                <div class="button-container">
+                    <a class="submit" href={% url 'vote:login' %}> LOGIN </a>
+                    <a class="submit2" href={% url 'vote:signup' %}> SIGNUP </a>
+                </div>
+                <div class="options">
+                    <a href="/" >Back to Home Page</a>
+                </div>
+            </form>
+        </div>
+    </body>
+{% endblock %}
