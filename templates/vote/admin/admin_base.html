@@ -6,7 +6,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-    <title>Admin Base</title>
+    {% block title_block %}
+        <title></title>
+    {% endblock %}
 </head>
 <body>
     <div class="sidebar">
@@ -51,23 +53,11 @@
             <div></div>
             <div>
                 {% if user.is_authenticated %}
-                    Hi, {{ fname }} {{ lname }}
+                    <a href={% url 'vote:admin_account' %}>Hi, {{ fname }} {{ lname }}</a>
                 {% endif %}
-                <img src="{% static 'images/dropdown.svg' %}" alt="drop">
             </div>
         </div>
 
-        {% for message in messages %}
-            <div role="alert">
-                <strong>Message:</strong> {{ message }}
-                <button type="button" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        {% endfor %}
-        <br>
-            <button type="submit"><a href={% url 'vote:log_out' %}> Logout </a></button>
-        <br>
         {% block body_block %}
 
         {% endblock %}

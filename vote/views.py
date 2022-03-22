@@ -92,10 +92,10 @@ def signup(request):
 
         return redirect('vote:login')
 
-    return render(request, 'vote/admin/signup.html')
+    return render(request, 'vote/user/signup.html')
 
 
-def login(request):
+def login_admin(request):
     if request.method == 'POST':
         username = request.POST['username']
         pass1 = request.POST['pass1']
@@ -110,7 +110,25 @@ def login(request):
         else:
             messages.error(request, "Your Username or Password is incorrect")
 
-    return render(request, 'vote/admin/login.html')
+    return render(request, 'vote/admin/login_admin.html')
+
+
+def login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        pass1 = request.POST['pass1']
+
+        user = authenticate(username=username, password=pass1)
+
+        if user is not None:
+            auth_login(request, user)
+            messages.success(request, "Login Successful.")
+            return redirect('vote:index')
+
+        else:
+            messages.error(request, "Your Username or Password is incorrect")
+
+    return render(request, 'vote/user/login.html')
 
 
 def log_out(request):
@@ -139,7 +157,7 @@ def activation_failed(request):
 
 
 def dashboard(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request.user.is_staff:
         total = Voter.objects.count()
         threshold = (total / 10) * 100
         fname = request.user.first_name
@@ -148,14 +166,14 @@ def dashboard(request):
             'fname': fname, 'lname': lname, 'total': total, 'threshold': threshold
         }
     else:
-        messages.info(request, "Login to continue")
+        messages.info(request, "Login as Administrator to continue")
         return redirect('vote:login')
 
     return render(request, 'vote/admin/dashboard.html', context)
 
 
 def county_detail(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request.user.is_staff:
         fname = request.user.first_name
         lname = request.user.last_name
         context = {
@@ -182,8 +200,27 @@ def county_detail(request):
     return render(request, 'vote/admin/county_detail.html', context)
 
 
+def admin_account(request):
+    if request.user.is_authenticated and request.user.is_staff:
+        uname = request.user.username
+        fname = request.user.first_name
+        lname = request.user.last_name
+        email = request.user.email
+        context = {
+            'uname': uname,
+            'fname': fname,
+            'lname': lname,
+            'email': email
+        }
+    else:
+        messages.info(request, "Login to continue")
+        return redirect('vote:login')
+
+    return render(request, 'vote/admin/admin_account.html', context)
+
+
 def county_list(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request.user.is_staff:
         county = County.objects.all()
         fname = request.user.first_name
         lname = request.user.last_name
@@ -200,7 +237,7 @@ def county_list(request):
 
 
 def constituency_detail(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request.user.is_staff:
         county = County.objects.all()
         fname = request.user.first_name
         lname = request.user.last_name
@@ -237,7 +274,7 @@ def constituency_detail(request):
 
 
 def constituency_list(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request.user.is_staff:
         fname = request.user.first_name
         lname = request.user.last_name
         constituency = Constituency.objects.all()
@@ -254,7 +291,7 @@ def constituency_list(request):
 
 
 def ward_detail(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request.user.is_staff:
         fname = request.user.first_name
         lname = request.user.last_name
         constituency = Constituency.objects.all()
@@ -291,7 +328,7 @@ def ward_detail(request):
 
 
 def ward_list(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request.user.is_staff:
         fname = request.user.first_name
         lname = request.user.last_name
         ward = Ward.objects.all()
@@ -328,7 +365,7 @@ def confirmation(request):
 
 
 def create_voter(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request.user.is_staff:
         fname = request.user.first_name
         lname = request.user.last_name
         ward = Ward.objects.all()
@@ -369,7 +406,7 @@ def create_voter(request):
 
 
 def voter_list(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request.user.is_staff:
         fname = request.user.first_name
         lname = request.user.last_name
         voter = Voter.objects.all()

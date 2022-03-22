@@ -1,0 +1,61 @@
+{% extends 'vote/admin/auth_base.html' %}
+{% load static %}
+{% block title_block %}
+    <title>Signup</title>
+{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+
+{% block body_block %}
+<body>
+    <div class="form-large">
+        <form method="post" action="/vote/signup">
+        {% for message in messages %}
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="message">
+                <h3>Error:</h3> {{ message }}
+            </div>
+            <br>
+            <br>
+        {% endfor %}
+        {% csrf_token %}
+            <h1>SIGNUP</h1>
+            <div class="field">
+                <label for="username"> Username </label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <div class="field">
+                <label for="fname"> First Name </label>
+                <input type="text" id="fname" name="fname" required>
+            </div>
+
+            <div class="field">
+                <label for="lname"> Last Name </label>
+                <input type="text" id="lname" name="lname" required>
+            </div>
+
+            <div class="field">
+                <label for="email"> Email Address </label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="field">
+                <label for="pass1"> Password </label>
+                <input type="password" id="pass1" name="pass1" required>
+            </div>
+
+            <div class="field">
+                <label for="pass2"> Confirm Your Password </label>
+                <input type="password" id="pass2" name="pass2" required>
+            </div>
+
+            <button type="submit" class="submit"> SIGNUP </button>
+        </form>
+
+    </div>
+</body>
+{% endblock %}

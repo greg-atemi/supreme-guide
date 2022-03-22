@@ -79,6 +79,19 @@ body{
     background-color: #FFFFFF;
 }
 
+.navbar a{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    margin-left: 16px;
+    margin-right: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
 .navbar div{
     margin-right: 32px;
     display: flex;
@@ -89,6 +102,10 @@ body{
     width: 16px;
     height: 16px;
     margin-left: 8px;
+}
+
+.tab-parent{
+    padding-top: 24px;
 }
 
 .tab-group{
@@ -278,6 +295,12 @@ body{
     margin-bottom: 16px;
 }
 
+.fieldWrapper3{
+    display: flex;
+    width: 60%;
+    margin-bottom: 16px;
+}
+
 .short{
     display: flex;
     width: 48%;
@@ -322,6 +345,12 @@ body{
 }
 
 .fieldWrapper2 label{
+    font-family: Lato, sans-serif;
+    width: 40%;
+    margin-bottom: 16px;
+}
+
+.fieldWrapper3 label{
     font-family: Lato, sans-serif;
     width: 40%;
     margin-bottom: 16px;

@@ -6,6 +6,7 @@ from . import views
 app_name = 'vote'
 
 urlpatterns = [
+    path('', views.index, name='index'),
     path('bio', views.bio, name='bio'),
     path('location', views.location, name='location'),
     path('photo', views.photo, name='photo'),
@@ -25,6 +26,7 @@ urlpatterns = [
     path('auth3', views.auth3, name='auth3'),
     path('signup', views.signup, name='signup'),
     path('login', views.login, name='login'),
+    path('admin_account', views.admin_account, name='admin_account'),
     path('log_out', views.log_out, name='log_out'),
     path('activate/<uidb64>/<token>', views.activate, name='activate'),
     path('activation_failed', views.activation_failed, name='activation_failed')
