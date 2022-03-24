@@ -1,0 +1,43 @@
+{% extends 'vote/user/base.html' %}
+{% load static %}
+{% block title_block %}
+    <title>Authorization</title>
+{% endblock %}
+
+{% block body_block %}
+    <div class="parent2">
+        <div class="title">
+            Your Account
+        </div>
+
+        <div class="formWrapper">
+            <div class="form">
+
+                <div class="fieldWrapper3">
+                    <label for="id_ward_code">Username:</label>
+                    <label for="id_ward_code">{{ uname }}</label>
+                </div>
+
+                <div class="fieldWrapper3">
+                    <label for="id_ward_code">First Name:</label>
+                    <label for="id_ward_code">{{ fname }}</label>
+                </div>
+
+                <div class="fieldWrapper3">
+                    <label for="id_ward_code">Last Name:</label>
+                    <label for="id_ward_code">{{ lname }}</label>
+                </div>
+
+                <div class="fieldWrapper3">
+                    <label for="id_ward_code">Email Address:</label>
+                    <label for="id_ward_code">{{ email }}</label>
+                </div>
+
+                     <div class="button-group">
+                        <a id="submit2" href={% url 'vote:log_out' %}>LOGOUT</a>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

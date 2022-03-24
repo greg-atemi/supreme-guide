@@ -15,7 +15,18 @@ from vote.tokens import generate_token
 
 
 def index(request):
-    return render(request, 'vote/user/index.html')
+    if request.user.is_authenticated:
+        fname = request.user.first_name
+        context = {
+            'fname': fname
+        }
+        messages.success(request, "Login Successful.")
+    else:
+        fname = ''
+        context = {
+            'fname': fname
+        }
+    return render(request, 'vote/user/index.html', context)
 
 
 def signup(request):
@@ -95,7 +106,7 @@ def signup(request):
     return render(request, 'vote/user/signup.html')
 
 
-def login_admin(request):
+def admin_login(request):
     if request.method == 'POST':
         username = request.POST['username']
         pass1 = request.POST['pass1']
@@ -131,9 +142,14 @@ def login(request):
     return render(request, 'vote/user/login.html')
 
 
+def admin_log_out(request):
+    logout(request)
+    return render(request, 'vote/admin/admin_logout.html')
+
+
 def log_out(request):
     logout(request)
-    return render(request, 'vote/admin/logout.html')
+    return render(request, 'vote/user/logout.html')
 
 
 def activate(request, uidb64, token):
@@ -170,6 +186,22 @@ def dashboard(request):
         return redirect('vote:login')
 
     return render(request, 'vote/admin/dashboard.html', context)
+
+
+def user_account(request):
+    uname = request.user.username
+    fname = request.user.first_name
+    lname = request.user.last_name
+    email = request.user.email
+
+    context = {
+        'uname': uname,
+        'fname': fname,
+        'lname': lname,
+        'email': email
+    }
+
+    return render(request, 'vote/user/user_account.html', context)
 
 
 def county_detail(request):

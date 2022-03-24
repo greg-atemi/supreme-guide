@@ -334,7 +334,7 @@ html,body{
 .button-group{
     display: flex;
     justify-content:space-between;
-    padding-top: 56px;
+    padding-top: 40px;
 }
 
 .button-parent{
@@ -515,4 +515,16 @@ html,body{
     padding: 6px 13px;
     font-family: Helvetica, sans-serif;
     cursor: pointer;
+}
+
+.fieldWrapper3{
+    display: flex;
+    width: 60%;
+    margin-bottom: 16px;
+}
+
+.fieldWrapper3 label{
+    font-family: Lato, sans-serif;
+    width: 40%;
+    margin-bottom: 16px;
 }

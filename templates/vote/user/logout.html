@@ -12,8 +12,11 @@
             <form>
                 <h1>YOU HAVE BEEN LOGGED OUT SUCCESSFULLY!</h1>
                 <div class="button-container">
-                    <a class="submit" href={% url 'vote:' %}> LOGIN </a>
+                    <a class="submit" href={% url 'vote:login' %}> LOGIN </a>
                     <a class="submit2" href={% url 'vote:signup' %}> SIGNUP </a>
+                </div>
+                <div class="options">
+                    <a href="/vote" >Back to Home Page</a>
                 </div>
             </form>
         </div>

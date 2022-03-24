@@ -17,15 +17,21 @@
     <div class="navbar">
         <img class="brand" src="{% static 'images/logo.svg' %}" alt="logo">
         <ul>
-            <li><a href="/">HOME</a> </li>
+            <li><a href="/vote">HOME</a> </li>
             <li><a href="#">LANGUAGE</a> </li>
             <li><a href="#">SERVICES</a> </li>
             <li><a href="#">ABOUT</a> </li>
             <li><a href="#">CONTACT</a> </li>
             <li>
-                <div class="account">
-                    <a href="#">Hi, First_name </a>
-                </div>
+                {% if user.is_authenticated %}
+                    <div class="account">
+                        <a href={% url 'vote:user_account' %}>Hi, {{ fname }} </a>
+                    </div>
+                {% else %}
+                    <div class="account">
+                        <a href={% url 'vote:login' %}>LOGIN</a>
+                    </div>
+                {% endif %}
             </li>
         </ul>
     </div>
