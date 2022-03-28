@@ -29,7 +29,7 @@ class Ward(models.Model):
 
 
 class Voter(models.Model):
-    id_serial_number = models.CharField(max_length=8, default=None)
+    id_serial_number = models.CharField(max_length=10, default=None)
     email = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, default=None)
     first_name = models.CharField(max_length=200)
     middle_name = models.CharField(max_length=200)

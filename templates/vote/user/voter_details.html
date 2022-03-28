@@ -1,0 +1,119 @@
+{% extends 'vote/user/base.html' %}
+{% load static %}
+{% block title_block %}
+    <title>Voter Details</title>
+{% endblock %}
+
+{% block body_block %}
+    <div class="parent2">
+        <div class="title">
+            Your Details
+        </div>
+
+        <div class="content2">
+            <div>
+                You Are a Registered Voter
+            </div>
+        </div>
+
+        <div class="content2">
+            <div>
+                Below are your registration details.
+            </div>
+        </div>
+
+        <div class="formWrapper">
+            <div class="form">
+                <p>Personal Details</p>
+                <form action="" method="post">
+                {% csrf_token %}
+                    <div class="fieldWrapper_group">
+                        <div class="fieldWrapper2">
+                            <label for="id_serial_number">ID Serial Number</label>
+                            <input class="input" type="text" name="id_serial_number" maxlength="10" id="id_serial_number" value="{{voter.id_serial_number}}" readonly>
+                        </div>
+
+                        <div class="spacer"></div>
+
+                        <div class="fieldWrapper2">
+                            <label for="first_name">First Name</label>
+                            <input class="input" type="text" name="first_name" maxlength="254" id="first_name" value="{{voter.first_name}}" readonly>
+                        </div>
+                    </div>
+
+                    <div class="fieldWrapper_group">
+                        <div class="fieldWrapper2">
+                            <label for="middle_name">Middle Name</label>
+                            <input class="input" type="text" name="middle_name" maxlength="254" id="middle_name" value="{{voter.middle_name}}" readonly>
+                        </div>
+
+                        <div class="spacer"></div>
+
+                        <div class="fieldWrapper2">
+                            <label for="last_name">Last Name</label>
+                            <input class="input" type="text" name="last_name" maxlength="254" id="last_name" value="{{voter.surname}}" readonly>
+                        </div>
+                    </div>
+
+                    <div class="fieldWrapper_group">
+                        <div class="fieldWrapper2">
+                            <label for="phone_number">Phone Number</label>
+                            <input class="input" type="text" name="phone_number" maxlength="10" id="phone_number" value="{{voter.phone_number}}" readonly>
+                        </div>
+
+                        <div class="spacer"></div>
+
+                        <div class="fieldWrapper2">
+                            <label for="gender">Gender</label>
+                            <input class="input" type="text" name="gender" maxlength="10" id="gender" value="{{voter.gender}}" readonly>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="formWrapper">
+            <div class="form">
+                <p>Location Details</p>
+                    <div class="fieldWrapper_group">
+                        <div class="fieldWrapper2">
+                            <label for="county">County</label>
+                            <input class="input" type="text" name="gender" maxlength="10" id="gender" value="{{voter.ward_code.constituency_code.county_code}}" readonly>
+                        </div>
+
+                        <div class="spacer"></div>
+
+                        <div class="fieldWrapper2">
+                            <label for="constituency">Constituency</label>
+                            <input class="input" type="text" name="gender" maxlength="10" id="gender" value="{{voter.ward_code.constituency_code}}" readonly>
+                        </div>
+                    </div>
+
+                    <div class="fieldWrapper_group">
+                        <div class="fieldWrapper2">
+                            <label for="ward">Ward</label>
+                            <input class="input" type="text" name="ward" maxlength="255" id="ward" value="{{voter.ward_code}}" readonly>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+        <div class="formWrapper">
+            <div class="form">
+                <div class="fieldWrapper">
+                    <label for="photo">Photo</label>
+                    <img id="output" src="{% static 'images/user.svg' %}" alt="placeholder"/>
+
+{#                    <img id="output" src="KuraProject{{ voter.photo.url }}" alt="placeholder"/>#}
+{#                    {{ voter.photo.url }}#}
+                </div>
+            </div>
+        </div>
+
+                <div class="button-parent">
+                    <div class="button-group2">
+                        <a class="submit" href={% url 'vote:index' %}>BACK</a>
+                    </div>
+                </div>
+                </form>
+            </div>
+
+{% endblock %}

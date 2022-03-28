@@ -33,14 +33,14 @@
                 <td class="cell">{{ voter.phone_number }}</td>
                 <td class="cell">{{ voter.gender }}</td>
                 <td class="cell">{{ voter.email.email }}</td>
-<!--
+
                 <td class="image-cell">
                     <img class="image" src="{{ voter.photo.url }}" alt="photo">
+                    {{ voter.photo.url }}
                 </td>
--->
+
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
 {% endblock %}

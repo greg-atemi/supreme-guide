@@ -30,59 +30,49 @@
                 <form action="" method="post">
                 {% csrf_token %}
                     <div class="fieldWrapper">
-                        {{ form.subject.errors }}
-                        <label for="id_Engine_no">ID Number</label>
-                        <input class="input" type="text" name="License_plate_no" maxlength="10" required="" id="id_License_plate_no">
+                        <label for="id_serial_number">ID Serial Number</label>
+                        <input class="input" type="text" name="id_serial_number" maxlength="9" id="id_serial_number" required>
                     </div>
 
                     <div class="fieldWrapper">
-                        {{ form.subject.errors }}
-                        <label for="id_Engine_no">First Name</label>
-                        <input class="input" type="text" name="License_plate_no" maxlength="254" required="" id="id_License_plate_no">
+                        <label for="first_name">First Name</label>
+                        <input class="input" type="text" name="first_name" maxlength="254" id="first_name" required>
                     </div>
 
                     <div class="fieldWrapper">
-                        {{ form.subject.errors }}
-                        <label for="id_Engine_no">Middle Name</label>
-                        <input class="input" type="text" name="Engine_no" maxlength="6" required="" id="id_Engine_no">
+                        <label for="middle_name">Middle Name</label>
+                        <input class="input" type="text" name="middle_name" maxlength="254" id="middle_name" required>
                     </div>
 
                     <div class="fieldWrapper">
-                        {{ form.subject.errors }}
-                        <label for="id_Mileage">Surname</label>
-                        <input class="input" type="text" name="surname" maxlength="254" required="" id="id_Mileage">
+                        <label for="surname">Surname</label>
+                        <input class="input" type="text" name="surname" maxlength="254" id="surname" required>
                     </div>
 
                     <div class="fieldWrapper">
-                        {{ form.subject.errors }}
-                        <label for="id_gender">Gender</label>
-                        <select class="input" name="gender" required="" id="id_gender">
+                        <label for="gender">Gender</label>
+                        <select class="input" name="gender" id="gender" required>
                             <option value="" selected=""></option>
-                            <option value="648641">Male</option>
-                            <option value="265484">Female</option>
-                            <option value="265484">Other</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
                         </select>
                     </div>
 
                     <div class="fieldWrapper">
-                        {{ form.subject.errors }}
-                        <label for="id_date_registered">Phone Number</label>
-                        <input class="input" type="text" name="date_registered" required="" id="id_date_registered">
-                    </div>
-
-                    <div class="fieldWrapper">
-                        {{ form.subject.errors }}
-                        <label for="id_date_registered">Email Address</label>
-                        <input class="input" type="text" name="date_registered" required="" id="id_date_registered">
+                        <label for="phone_number">Phone Number</label>
+                        <input class="input" type="text" name="phone_number" maxlength="10" id="phone_number" required>
                     </div>
 
                     <div class="button-group">
                         <input type="reset" class="submit" value="CLEAR">
                         <input id="submit2" type="submit" value="NEXT"/>
                     </div>
+
                 </form>
             </div>
         </div>
     </div>
-<a href={% url 'vote:location' %}>NEXT</a>
+{#<a href={% url 'vote:location' %}>NEXT</a>#}
+{#<a id="button5" href="{% url 'vote:location' Voter.email %}">NEXT</a>#}
 {% endblock %}

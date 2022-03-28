@@ -5,7 +5,12 @@
 {% endblock %}
 
 {% block body_block %}
-    <div class="parent">
+    <div class="parent2">
+        {% for message in messages %}
+        <div class="message">
+            <h3>Message :</h3> {{ message }}
+        </div>
+        {% endfor %}
         <div class="banner-container">
             <img class="banner" src="{% static 'images/Banner.svg' %}" alt="logo">
         </div>
@@ -38,7 +43,7 @@
         <div class="list">
             <ul>
                 <li>Valid Kenyan ID or Kenyan Passport</li>
-                <li>Current Passport photo</li>
+                <li>A recent digitized passport photo</li>
             </ul>
         </div>
         <div class="content-title">
@@ -55,25 +60,16 @@
             </div>
         </div>
         <div class="button-container">
-            <a class="submit" href={% url 'vote:auth' %}>
+            <a class="submit" href={% url 'vote:check_details_auth' %}>
                 CHECK STATUS
             </a>
             <a class="submit2" href={% url 'vote:bio' %}>
                 BEGIN REGISTRATION
             </a>
-            <a class="submit" href={% url 'vote:auth' %}>
+            <a class="submit" href={% url 'vote:update_details_auth' %}>
                 UPDATE DETAILS
             </a>
         </div>
     </div>
-
-{#    <script>#}
-{#        {% for message in messages %}#}
-{#            var source = new EventSource("http://127.0.0.1:8000/vote/");#}
-{#            source.onopen = function() {#}
-{#                alert("message");#}
-{#            }#}
-{#        {% endfor %}#}
-{#    </script>#}
 
 {% endblock %}

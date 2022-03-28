@@ -1,18 +1,18 @@
 {% extends 'vote/user/base.html' %}
 {% load static %}
 {% block title_block %}
-    <title>Check Details Auth</title>
+    <title>Update Details Auth</title>
 {% endblock %}
 
 {% block body_block %}
     <div class="parent2">
         <div class="title">
-            View Registration Details
+            Update Registration Details
         </div>
 
         <div class="content2">
             <div>
-                To check your registration details, please input the following details
+                To update your registration details, please input the following details
             </div>
         </div>
 
@@ -44,4 +44,5 @@
             </div>
         </div>
     </div>
+<a href={% url 'vote:auth2' %}>NEXT</a>
 {% endblock %}

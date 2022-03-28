@@ -20,7 +20,6 @@ def index(request):
         context = {
             'fname': fname
         }
-        messages.success(request, "Login Successful.")
     else:
         fname = ''
         context = {
@@ -371,29 +370,180 @@ def ward_list(request):
         }
     else:
         messages.info(request, "Login to continue")
-        return redirect('vote:login')
+        return redirect('vote:admin_login')
 
     return render(request, 'vote/admin/ward_list.html', context)
 
 
 def bio(request):
-    return render(request, 'vote/user/bio.html')
+    if request.user.is_authenticated:
+        fname = request.user.first_name
+        context = {
+            'fname': fname
+        }
+
+        if Voter.objects.filter(email=request.user.id):
+            messages.error(request, "You are already registered as a voter!!")
+            return redirect('vote:index')
+
+        if request.method == "POST":
+            id_serial_number = request.POST['id_serial_number']
+            email = request.user.id
+            first_name = request.POST['first_name']
+            middle_name = request.POST['middle_name']
+            surname = request.POST['surname']
+            phone_number = request.POST['phone_number']
+            gender = request.POST['gender']
+            photo = 'user.svg'
+            ward_code = '00000000'
+
+            myvoter = Voter.objects.create(id_serial_number=id_serial_number, email_id=email, first_name=first_name,
+                                           middle_name=middle_name, surname=surname, phone_number=phone_number,
+                                           gender=gender, photo=photo, ward_code_id=ward_code)
+
+            myvoter.save()
+
+            return redirect('vote:location')
+
+    else:
+        messages.info(request, "Login to continue")
+        return redirect('vote:login')
+    return render(request, 'vote/user/bio.html', context)
 
 
-def location(request):
-    return render(request, 'vote/user/location.html')
+# def bio(request):
+#     if request.user.is_authenticated:
+#         fname = request.user.first_name
+#         context = {
+#             'fname': fname
+#         }
+#         if request.method == "POST":
+#             id_serial_number = request.POST['id_serial_number']
+#             email = request.user.id
+#             first_name = request.POST['first_name']
+#             middle_name = request.POST['middle_name']
+#             surname = request.POST['surname']
+#             phone_number = request.POST['phone_number']
+#             gender = request.POST['gender']
+#             photo = 'user.svg'
+#             ward_code = '00000000'
+#
+#             myvoter = Voter.objects.create(id_serial_number=id_serial_number, email_id=email, first_name=first_name,
+#                                            middle_name=middle_name, surname=surname, phone_number=phone_number,
+#                                            gender=gender, photo=photo, ward_code_id=ward_code)
+#
+#             myvoter.save()
+#
+#             return redirect('vote:location')
+#
+#     else:
+#         messages.info(request, "Login to continue")
+#         return redirect('vote:login')
+#     return render(request, 'vote/user/bio.html', context)
 
 
-def photo(request):
-    return render(request, 'vote/user/photo.html')
+def location(request, id_serial_number):
+    if request.user.is_authenticated:
+        fname = request.user.first_name
+        voter = Voter.objects.get(id_serial_number=id_serial_number)
+        context = {
+            'fname': fname,
+            'voter': voter
+        }
+        if request.method == "POST":
+            id_serial_number = voter.id_serial_number
+            email = request.user.id
+            first_name = voter.first_name
+            middle_name = voter.middle_name
+            surname = voter.surname
+            phone_number = voter.phone_number
+            gender = voter.gender
+            photo = 'user.svg'
+            ward_code = request.POST['ward_code']
+
+            Voter.objects.update(id_serial_number=id_serial_number, email_id=email, first_name=first_name,
+                                 middle_name=middle_name, surname=surname, phone_number=phone_number,
+                                 gender=gender, photo=photo, ward_code_id=ward_code)
+
+            return redirect('vote:photo')
+
+    else:
+        messages.info(request, "Login to continue")
+        return redirect('vote:login')
+
+    return render(request, 'vote/user/location.html', context)
+
+
+def photo(request, id_serial_number):
+    if request.user.is_authenticated:
+        fname = request.user.first_name
+        voter = Voter.objects.get(id_serial_number=id_serial_number)
+        context = {
+            'fname': fname,
+            'voter': voter
+        }
+        if request.method == "POST":
+            id_serial_number = voter.id_serial_number
+            email = request.user.id
+            first_name = voter.first_name
+            middle_name = voter.middle_name
+            surname = voter.surname
+            phone_number = voter.phone_number
+            gender = voter.gender
+            photo = request.POST['photo']
+            ward_code = voter.ward_code
+
+            Voter.objects.update(id_serial_number=id_serial_number, email_id=email, first_name=first_name,
+                                 middle_name=middle_name, surname=surname, phone_number=phone_number,
+                                 gender=gender, photo=photo, ward_code_id=ward_code)
+
+            return redirect('vote:confirmation')
+
+    else:
+        messages.info(request, "Login to continue")
+        return redirect('vote:login')
+
+    return render(request, 'vote/user/photo.html', context)
 
 
 def success(request):
-    return render(request, 'vote/user/success.html')
+    if request.user.is_authenticated:
+        fname = request.user.first_name
+        context = {
+            'fname': fname
+        }
+    return render(request, 'vote/user/success.html', context)
 
 
-def confirmation(request):
-    return render(request, 'vote/user/confirmation.html')
+def confirmation(request, id_serial_number):
+    if request.user.is_authenticated:
+        fname = request.user.first_name
+        voter = Voter.objects.get(id_serial_number=id_serial_number)
+        context = {
+            'fname': fname,
+            'voter': voter
+        }
+        if request.method == "POST":
+            id_serial_number = voter.id_serial_number
+            email = request.user.id
+            first_name = voter.first_name
+            middle_name = voter.middle_name
+            surname = voter.surname
+            phone_number = voter.phone_number
+            gender = voter.gender
+            photo = request.POST['photo']
+            ward_code = voter.ward_code
+
+            Voter.objects.update(id_serial_number=id_serial_number, email_id=email, first_name=first_name,
+                                 middle_name=middle_name, surname=surname, phone_number=phone_number,
+                                 gender=gender, photo=photo, ward_code_id=ward_code)
+
+            return redirect('vote:success')
+    else:
+        messages.info(request, "Login to continue")
+        return redirect('vote:login')
+
+    return render(request, 'vote/user/confirmation.html', context)
 
 
 def create_voter(request):
@@ -456,8 +606,97 @@ def voter_list(request):
     return render(request, 'vote/admin/voter_list.html', context)
 
 
-def auth(request):
-    return render(request, 'vote/user/auth.html')
+def check_details_auth(request):
+    if request.user.is_authenticated:
+        fname = request.user.first_name
+        context = {
+            'fname': fname
+        }
+        if request.method == "POST":
+            email = request.POST['email']
+            id_serial_number = request.POST['id_serial_number']
+
+            if request.user.email == email:
+                return redirect('vote:voter_details', id_serial_number)
+
+            else:
+                messages.error(request, "Invalid details, please Login and try again")
+                return redirect('vote:log_out')
+    else:
+        messages.info(request, "Login to continue")
+        return redirect('vote:login')
+
+    return render(request, 'vote/user/check_details_auth.html', context)
+
+
+def voter_details(request, id_serial_number):
+    if request.user.is_authenticated:
+        fname = request.user.first_name
+        voter = Voter.objects.get(id_serial_number=id_serial_number)
+        context = {
+            'fname': fname,
+            'voter': voter
+        }
+
+    else:
+        messages.info(request, "Login to continue")
+        return redirect('vote:login')
+
+    return render(request, 'vote/user/voter_details.html', context)
+
+
+def update_details_auth(request):
+    if request.user.is_authenticated:
+        fname = request.user.first_name
+        context = {
+            'fname': fname
+        }
+        if request.method == "POST":
+            email = request.POST['email']
+            id_serial_number = request.POST['id_serial_number']
+
+            if request.user.email == email:
+                return redirect('vote:update_details', id_serial_number)
+
+            else:
+                messages.error(request, "Invalid details, please Login and try again")
+                return redirect('vote:log_out')
+    else:
+        messages.info(request, "Login to continue")
+        return redirect('vote:login')
+
+    return render(request, 'vote/user/update_details_auth.html', context)
+
+
+def update_details(request, id_serial_number):
+    if request.user.is_authenticated:
+        fname = request.user.first_name
+        voter = Voter.objects.get(id_serial_number=id_serial_number)
+        context = {
+            'fname': fname,
+            'voter': voter
+        }
+        if request.method == "POST":
+            id_serial_number = voter.id_serial_number
+            email = request.user.id
+            first_name = voter.first_name
+            middle_name = voter.middle_name
+            surname = voter.surname
+            phone_number = voter.phone_number
+            gender = voter.gender
+            photo = request.POST['photo']
+            ward_code = voter.ward_code
+
+            Voter.objects.update(id_serial_number=id_serial_number, email_id=email, first_name=first_name,
+                                 middle_name=middle_name, surname=surname, phone_number=phone_number,
+                                 gender=gender, photo=photo, ward_code_id=ward_code)
+
+            return redirect('vote:success')
+    else:
+        messages.info(request, "Login to continue")
+        return redirect('vote:login')
+
+    return render(request, 'vote/user/update_details.html', context)
 
 
 def auth2(request):
