@@ -1,18 +1,18 @@
 {% extends 'vote/user/base.html' %}
 {% load static %}
 {% block title_block %}
-    <title>Authorization</title>
+    <title>Check Status</title>
 {% endblock %}
 
 {% block body_block %}
     <div class="parent2">
         <div class="title">
-            Update Registration Details
+            View Registration Details
         </div>
 
         <div class="content2">
             <div>
-                To check your registration details, please input your ID Number
+                To check your registration details, please input the following details
             </div>
         </div>
 
@@ -27,9 +27,13 @@
                 <form action="" method="post">
                 {% csrf_token %}
                     <div class="fieldWrapper">
-                        {{ form.subject.errors }}
-                        <label for="id_Engine_no">ID Number</label>
-                        <input class="input" type="text" name="License_plate_no" maxlength="10" required="" id="id_License_plate_no">
+                        <label for="id_serial_number">ID Serial Number</label>
+                        <input class="input" type="text" name="id_serial_number" maxlength="10" required="" id="id_serial_number">
+                    </div>
+
+                    <div class="fieldWrapper">
+                        <label for="email">Email</label>
+                        <input class="input" type="text" name="email" maxlength="254" required="" id="email">
                     </div>
 
                     <div class="button-group">
