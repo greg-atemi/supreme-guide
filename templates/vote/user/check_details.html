@@ -100,10 +100,7 @@
             <div class="form">
                 <div class="fieldWrapper">
                     <label for="photo">Photo</label>
-                    <img id="output" src="{% static 'images/user.svg' %}" alt="placeholder"/>
-
-{#                    <img id="output" src="KuraProject{{ voter.photo.url }}" alt="placeholder"/>#}
-{#                    {{ voter.photo.url }}#}
+                    <img id="output" src="{{ voter.photo.url }}" alt="Loading..."/>
                 </div>
             </div>
         </div>
