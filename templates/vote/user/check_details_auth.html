@@ -6,6 +6,16 @@
 
 {% block body_block %}
     <div class="parent2">
+
+        <div class="content2">
+            {% for message in messages %}
+                <div class="message">
+                    <h3>Error:</h3> {{ message }}
+                </div>
+            <br>
+            {% endfor %}
+        </div>
+
         <div class="title">
             View Registration Details
         </div>
@@ -13,12 +23,6 @@
         <div class="content2">
             <div>
                 To check your registration details, please input the following details
-            </div>
-        </div>
-
-        <div class="content2">
-            <div>
-                {{ voter }}
             </div>
         </div>
 
