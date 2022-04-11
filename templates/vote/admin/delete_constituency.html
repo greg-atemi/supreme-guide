@@ -1,0 +1,29 @@
+{% extends 'vote/admin/admin_base.html' %}
+{% load static %}
+{% block title_block %}
+    <title>Delete Constituency</title>
+{% endblock %}
+
+{% block body_block %}
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form">
+            <p>Delete Constituency</p>
+                <div class="fieldWrapper_group">
+                    <div class="fieldWrapper2">
+                        <label for="county_code">Are you sure about this action?</label>
+                        <label for="county_code">Action:</label>
+                        <label for="county_code">Delete {{ constituency.constituency_name }}</label>
+                    </div>
+                </div>
+        </div>
+
+        <div class="button-group">
+            <a type="reset" class="submit" href="{% url 'vote:constituency_list' %}"> BACK </a>
+            <input id="submit2" type="submit" value="YES"/>
+        </div>
+
+    </form>
+
+{% endblock %}
