@@ -18,7 +18,10 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
-MEDIA_DIR = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 EMAIL_USE_TLS = EMAIL_USE_TLS
 EMAIL_HOST = EMAIL_HOST
@@ -140,11 +143,6 @@ STATIC_URL = 'static/'
 # LOGIN_REDIRECT_URL = '/'
 
 STATIC_FILES = [STATIC_DIR, ]
-
-# Media
-MEDIA_ROOT = MEDIA_DIR
-
-MEDIA_URL = '/media/'
 
 LOGIN_URL = '/details/user_login'
 

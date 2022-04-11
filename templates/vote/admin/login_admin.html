@@ -1,7 +1,7 @@
 {% extends 'vote/admin/auth_base.html' %}
 {% load static %}
 {% block title_block %}
-    <title>Login</title>
+    <title>Admin Login</title>
 {% endblock %}
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +10,7 @@
 
     <body>
         <div class="form">
-            <form method="post" action="/vote/login">
+            <form method="post" action="">
 
                 {% for message in messages %}
                 <div class="message">
@@ -19,7 +19,7 @@
                 <br>
                 {% endfor %}
 
-                <h1> LOGIN </h1>
+                <h1>ADMIN LOGIN</h1>
                 {% csrf_token %}
                 <div class="field">
                     <label for="username"> Username </label>
@@ -35,7 +35,6 @@
 
                 <div class="options">
                     <a href="#" >Forgot Password?</a>
-                    <a href="{% url 'vote:signup' %}" >Click Here to Signup</a>
                 </div>
 
             </form>

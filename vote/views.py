@@ -12,6 +12,7 @@ from django.utils.encoding import force_bytes, force_str
 from vote.models import County, Constituency, Ward, Voter
 from KuraProject import settings
 from vote.tokens import generate_token
+from django.core.files.storage import FileSystemStorage
 
 
 def index(request):
@@ -114,11 +115,11 @@ def admin_login(request):
 
         if user is not None:
             auth_login(request, user)
-            messages.success(request, "Login Successful.")
             return redirect('vote:dashboard')
 
         else:
             messages.error(request, "Your Username or Password is incorrect")
+            return redirect('vote:admin_login')
 
     return render(request, 'vote/admin/login_admin.html')
 
@@ -178,11 +179,14 @@ def dashboard(request):
         fname = request.user.first_name
         lname = request.user.last_name
         context = {
-            'fname': fname, 'lname': lname, 'total': total, 'threshold': threshold
+            'fname': fname,
+            'lname': lname,
+            'total': total,
+            'threshold': threshold
         }
     else:
-        messages.info(request, "Login as Administrator to continue")
-        return redirect('vote:login')
+        messages.info(request, "Admin privileges required")
+        return redirect('vote:admin_login')
 
     return render(request, 'vote/admin/dashboard.html', context)
 
@@ -226,7 +230,7 @@ def county_detail(request):
             return redirect('vote:county_list')
     else:
         messages.info(request, "Login to continue")
-        return redirect('vote:login')
+        return redirect('vote:admin_login')
 
     return render(request, 'vote/admin/county_detail.html', context)
 
@@ -245,7 +249,7 @@ def admin_account(request):
         }
     else:
         messages.info(request, "Login to continue")
-        return redirect('vote:login')
+        return redirect('vote:admin_login')
 
     return render(request, 'vote/admin/admin_account.html', context)
 
@@ -262,7 +266,7 @@ def county_list(request):
         }
     else:
         messages.info(request, "Login to continue")
-        return redirect('vote:login')
+        return redirect('vote:admin_login')
 
     return render(request, 'vote/admin/county_list.html', context)
 
@@ -299,7 +303,7 @@ def constituency_detail(request):
 
     else:
         messages.info(request, "Login to continue")
-        return redirect('vote:login')
+        return redirect('vote:admin_login')
 
     return render(request, 'vote/admin/constituency_detail.html', context)
 
@@ -316,7 +320,7 @@ def constituency_list(request):
         }
     else:
         messages.info(request, "Login to continue")
-        return redirect('vote:login')
+        return redirect('vote:admin_login')
 
     return render(request, 'vote/admin/constituency_list.html', context)
 
@@ -353,7 +357,7 @@ def ward_detail(request):
 
     else:
         messages.info(request, "Login to continue")
-        return redirect('vote:login')
+        return redirect('vote:admin_login')
 
     return render(request, 'vote/admin/ward_detail.html', context)
 
@@ -403,43 +407,12 @@ def bio(request):
 
             myvoter.save()
 
-            return redirect('vote:location')
+            return redirect('vote:location', id_serial_number)
 
     else:
         messages.info(request, "Login to continue")
         return redirect('vote:login')
     return render(request, 'vote/user/bio.html', context)
-
-
-# def bio(request):
-#     if request.user.is_authenticated:
-#         fname = request.user.first_name
-#         context = {
-#             'fname': fname
-#         }
-#         if request.method == "POST":
-#             id_serial_number = request.POST['id_serial_number']
-#             email = request.user.id
-#             first_name = request.POST['first_name']
-#             middle_name = request.POST['middle_name']
-#             surname = request.POST['surname']
-#             phone_number = request.POST['phone_number']
-#             gender = request.POST['gender']
-#             photo = 'user.svg'
-#             ward_code = '00000000'
-#
-#             myvoter = Voter.objects.create(id_serial_number=id_serial_number, email_id=email, first_name=first_name,
-#                                            middle_name=middle_name, surname=surname, phone_number=phone_number,
-#                                            gender=gender, photo=photo, ward_code_id=ward_code)
-#
-#             myvoter.save()
-#
-#             return redirect('vote:location')
-#
-#     else:
-#         messages.info(request, "Login to continue")
-#         return redirect('vote:login')
-#     return render(request, 'vote/user/bio.html', context)
 
 
 def location(request, id_serial_number):
@@ -461,11 +434,14 @@ def location(request, id_serial_number):
             photo = 'user.svg'
             ward_code = request.POST['ward_code']
 
-            Voter.objects.update(id_serial_number=id_serial_number, email_id=email, first_name=first_name,
-                                 middle_name=middle_name, surname=surname, phone_number=phone_number,
-                                 gender=gender, photo=photo, ward_code_id=ward_code)
+            myvoter = Voter(id_serial_number=id_serial_number, email_id=email, first_name=first_name,
+                            middle_name=middle_name, surname=surname, phone_number=phone_number,
+                            gender=gender, photo=photo, ward_code_id=ward_code)
 
-            return redirect('vote:photo')
+            myvoter.save()
+            # myvoter.save(force_update=True)
+
+            return redirect('vote:photo', id_serial_number)
 
     else:
         messages.info(request, "Login to continue")
@@ -493,11 +469,13 @@ def photo(request, id_serial_number):
             photo = request.POST['photo']
             ward_code = voter.ward_code
 
-            Voter.objects.update(id_serial_number=id_serial_number, email_id=email, first_name=first_name,
-                                 middle_name=middle_name, surname=surname, phone_number=phone_number,
-                                 gender=gender, photo=photo, ward_code_id=ward_code)
+            my_voter = Voter(id_serial_number=id_serial_number, email_id=email, first_name=first_name,
+                             middle_name=middle_name, surname=surname, phone_number=phone_number,
+                             gender=gender, photo=photo, ward_code_id=ward_code)
 
-            return redirect('vote:confirmation')
+            my_voter.save()
+
+            return redirect('vote:confirmation', id_serial_number)
 
     else:
         messages.info(request, "Login to continue")
@@ -524,19 +502,25 @@ def confirmation(request, id_serial_number):
             'voter': voter
         }
         if request.method == "POST":
-            id_serial_number = voter.id_serial_number
+            id_serial_number = request.POST['id_serial_number']
             email = request.user.id
-            first_name = voter.first_name
-            middle_name = voter.middle_name
-            surname = voter.surname
-            phone_number = voter.phone_number
+            first_name = request.POST['first_name']
+            middle_name = request.POST['middle_name']
+            surname = request.POST['surname']
+            phone_number = request.POST['phone_number']
             gender = voter.gender
             photo = request.POST['photo']
-            ward_code = voter.ward_code
 
-            Voter.objects.update(id_serial_number=id_serial_number, email_id=email, first_name=first_name,
-                                 middle_name=middle_name, surname=surname, phone_number=phone_number,
-                                 gender=gender, photo=photo, ward_code_id=ward_code)
+            if photo == "":
+                photo = voter.photo
+
+            ward_code = request.POST['ward_code']
+
+            my_voter = Voter(id_serial_number=id_serial_number, email_id=email, first_name=first_name,
+                             middle_name=middle_name, surname=surname, phone_number=phone_number,
+                             gender=gender, photo=photo, ward_code_id=ward_code)
+
+            my_voter.save()
 
             return redirect('vote:success')
     else:
@@ -609,19 +593,33 @@ def voter_list(request):
 def check_details_auth(request):
     if request.user.is_authenticated:
         fname = request.user.first_name
+
         context = {
             'fname': fname
         }
-        if request.method == "POST":
-            email = request.POST['email']
-            id_serial_number = request.POST['id_serial_number']
 
-            if request.user.email == email:
+        if request.method == "POST":
+            # email1 = request.POST['email']
+
+            id_serial_number = request.POST['id_serial_number']
+            try:
+                voter = Voter.objects.select_related('email__voter').get(id_serial_number=id_serial_number)
+            except Voter.DoesNotExist:
+                messages.error(request, "Invalid details, please try again")
+                return redirect('vote:check_details_auth')
+
+            email2 = voter.email.email
+            email3 = request.user.email
+
+            # if email1 == email2 and email2 == email3 and email1 == email3:
+            #     return redirect('vote:voter_details', id_serial_number)
+
+            if email2 == email3:
                 return redirect('vote:voter_details', id_serial_number)
 
             else:
-                messages.error(request, "Invalid details, please Login and try again")
-                return redirect('vote:log_out')
+                messages.error(request, "Invalid details, please try again")
+                return redirect('vote:check_details_auth')
     else:
         messages.info(request, "Login to continue")
         return redirect('vote:login')
@@ -632,17 +630,19 @@ def check_details_auth(request):
 def voter_details(request, id_serial_number):
     if request.user.is_authenticated:
         fname = request.user.first_name
-        voter = Voter.objects.get(id_serial_number=id_serial_number)
+        voter = Voter.objects.select_related('email__voter').get(id_serial_number=id_serial_number)
+        myvoter = voter.gender
         context = {
             'fname': fname,
-            'voter': voter
+            'voter': voter,
+            'myvoter': myvoter
         }
 
     else:
         messages.info(request, "Login to continue")
         return redirect('vote:login')
 
-    return render(request, 'vote/user/voter_details.html', context)
+    return render(request, 'vote/user/check_details.html', context)
 
 
 def update_details_auth(request):
@@ -652,10 +652,13 @@ def update_details_auth(request):
             'fname': fname
         }
         if request.method == "POST":
-            email = request.POST['email']
+            email1 = request.POST['email']
             id_serial_number = request.POST['id_serial_number']
+            voter = Voter.objects.select_related('email__voter').get(id_serial_number=id_serial_number)
+            email2 = voter.email.email
+            email3 = request.user.email
 
-            if request.user.email == email:
+            if email1 == email2 and email2 == email3 and email1 == email3:
                 return redirect('vote:update_details', id_serial_number)
 
             else:
@@ -672,9 +675,15 @@ def update_details(request, id_serial_number):
     if request.user.is_authenticated:
         fname = request.user.first_name
         voter = Voter.objects.get(id_serial_number=id_serial_number)
+        county = County.objects.all()
+        constituency = Constituency.objects.all()
+        ward = Ward.objects.all()
         context = {
             'fname': fname,
-            'voter': voter
+            'voter': voter,
+            'county': county,
+            'constituency': constituency,
+            'ward': ward
         }
         if request.method == "POST":
             id_serial_number = voter.id_serial_number
@@ -682,14 +691,14 @@ def update_details(request, id_serial_number):
             first_name = voter.first_name
             middle_name = voter.middle_name
             surname = voter.surname
-            phone_number = voter.phone_number
+            phone_number = request.POST['phone_number']
             gender = voter.gender
-            photo = request.POST['photo']
-            ward_code = voter.ward_code
+            image = request.POST['image']
+            ward_code = request.POST['ward_code']
 
             Voter.objects.update(id_serial_number=id_serial_number, email_id=email, first_name=first_name,
                                  middle_name=middle_name, surname=surname, phone_number=phone_number,
-                                 gender=gender, photo=photo, ward_code_id=ward_code)
+                                 gender=gender, photo=image, ward_code_id=ward_code)
 
             return redirect('vote:success')
     else:
@@ -697,6 +706,52 @@ def update_details(request, id_serial_number):
         return redirect('vote:login')
 
     return render(request, 'vote/user/update_details.html', context)
+
+
+def update_county(request, county_code):
+    if request.user.is_authenticated and request.user.is_staff:
+        fname = request.user.first_name
+        lname = request.user.last_name
+        county = County.objects.get(county_code=county_code)
+        context = {
+            'fname': fname,
+            'lname': lname,
+            'county': county
+        }
+
+        if request.method == "POST":
+            code = request.POST['county_code']
+            name = request.POST['county_name']
+
+            mycounty = County(county_code=code, county_name=name)
+            mycounty.save()
+            
+            return redirect('vote:county_list')
+    else:
+        messages.info(request, "Login to continue")
+        return redirect('vote:admin_login')
+
+    return render(request, 'vote/admin/update_county.html', context)
+
+
+def delete_county(request, county_code):
+    if request.user.is_authenticated and request.user.is_staff:
+        fname = request.user.first_name
+        lname = request.user.last_name
+        county = County.objects.get(county_code=county_code)
+        context = {
+            'fname': fname,
+            'lname': lname,
+            'county': county
+        }
+
+        if request.method == "POST":
+            county.delete()
+            return redirect('vote:county_list')
+    else:
+        messages.info(request, "Login to continue")
+        return redirect('vote:admin_login')
+    return render(request, 'vote/admin/delete_county.html', context)
 
 
 def auth2(request):

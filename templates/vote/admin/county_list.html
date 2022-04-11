@@ -21,6 +21,8 @@
                 <th class="head-item">COUNTY CODE</th>
                 <th class="head-item">COUNTY NAME</th>
                 <th class="head-item">NO. OF VOTERS</th>
+                <th class="head-item"></th>
+                <th class="head-item"></th>
             </tr>
         </thead>
         <tbody>
@@ -29,6 +31,8 @@
                 <td class="cell">{{ county.county_code }}</td>
                 <td class="cell">{{ county.county_name }}</td>
                 <td class="cell">2500000</td>
+                <td class="cell" id="table1"><a class="action2" href="{% url 'vote:update_county' county.county_code %}">Update</a></td>
+                <td class="cell" id="table1"><a class="action" href="{% url 'vote:delete_county' county.county_code %}">Delete</a></td>
             </tr>
         {% endfor %}
         </tbody>

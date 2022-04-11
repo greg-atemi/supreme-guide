@@ -25,121 +25,106 @@
         <div class="content">
             Please note that providing false information is a crime punishable by law.
         </div>
-        <div class="formWrapper">
-            <div class="form">
-                <p>Personal Details</p>
-                <form action="" method="post">
-                {% csrf_token %}
-                    <div class="fieldWrapper_group">
-                        <div class="fieldWrapper2">
-                            <label for="id_serial_number">ID Serial Number</label>
-                            <input class="input" type="text" name="id_serial_number" maxlength="10" id="id_serial_number" value="{{voter.id_serial_number}}" required>
+        <div>
+            <div class="formWrapper">
+                <div class="form">
+                    <p>Personal Details</p>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="fieldWrapper_group">
+                            <div class="fieldWrapper2">
+                                <label for="id_serial_number">ID Serial Number</label>
+                                <input class="input" type="text" name="id_serial_number" maxlength="10" id="id_serial_number" value="{{voter.id_serial_number}}" required>
+                            </div>
+
+                            <div class="spacer"></div>
+
+                            <div class="fieldWrapper2">
+                                <label for="first_name">First Name</label>
+                                <input class="input" type="text" name="first_name" maxlength="254" id="first_name" value="{{voter.first_name}}" required>
+                            </div>
                         </div>
 
-                        <div class="spacer"></div>
+                        <div class="fieldWrapper_group">
+                            <div class="fieldWrapper2">
+                                <label for="middle_name">Middle Name</label>
+                                <input class="input" type="text" name="middle_name" maxlength="254" id="middle_name" value="{{voter.middle_name}}" required>
+                            </div>
 
-                        <div class="fieldWrapper2">
-                            <label for="first_name">First Name</label>
-                            <input class="input" type="text" name="first_name" maxlength="254" id="first_name" value="{{voter.first_name}}" required>
-                        </div>
-                    </div>
+                            <div class="spacer"></div>
 
-                    <div class="fieldWrapper_group">
-                        <div class="fieldWrapper2">
-                            <label for="middle_name">Middle Name</label>
-                            <input class="input" type="text" name="middle_name" maxlength="254" id="middle_name" value="{{voter.middle_name}}" required>
-                        </div>
-
-                        <div class="spacer"></div>
-
-                        <div class="fieldWrapper2">
-                            <label for="last_name">Last Name</label>
-                            <input class="input" type="text" name="last_name" maxlength="254" id="last_name" value="{{voter.surname}}" required>
-                        </div>
-                    </div>
-
-                    <div class="fieldWrapper_group">
-                        <div class="fieldWrapper2">
-                            <label for="phone_number">Phone Number</label>
-                            <input class="input" type="text" name="phone_number" maxlength="10" id="phone_number" value="{{voter.phone_number}}" required>
+                            <div class="fieldWrapper2">
+                                <label for="surname">Surname</label>
+                                <input class="input" type="text" name="surname" maxlength="254" id="surname" value="{{voter.surname}}" required>
+                            </div>
                         </div>
 
-                        <div class="spacer"></div>
+                        <div class="fieldWrapper_group">
+                            <div class="fieldWrapper2">
+                                <label for="phone_number">Phone Number</label>
+                                <input class="input" type="text" name="phone_number" maxlength="10" id="phone_number" value="{{voter.phone_number}}" required>
+                            </div>
 
-                        <div class="fieldWrapper2">
-                            <label for="gender">Gender</label>
-                            <input class="input" type="text" name="gender" maxlength="10" id="gender" value="{{voter.gender}}" required>
+                            <div class="spacer"></div>
+
+                            <div class="fieldWrapper2">
+                                <label for="gender">Gender</label>
+                                <input class="input" type="text" name="gender" maxlength="10" id="gender" value="{{voter.gender}}" required>
+                            </div>
                         </div>
-                    </div>
-            </div>
-        </div>
-        <div class="formWrapper">
-            <div class="form">
-                <p>Location Details</p>
-                    <div class="fieldWrapper_group">
-                        <div class="fieldWrapper2">
-                            <label for="county">County</label>
-                            <select class="input" name="county" required="" id="county">
-                                <option value=""></option>
-                                <option value="047">Nairobi</option>
-                                <option value="005">Tana River</option>
-                                <option value="045">Vihiga</option>
-                                <option value="001">Mombasa</option>
-                            </select>
-                        </div>
-
-                        <div class="spacer"></div>
-
-                        <div class="fieldWrapper2">
-                            <label for="constituency">Constituency</label>
-                            <select class="input" name="constituency" required="" id="constituency">
-                                <option value=""></option>
-                                <option value="00000005">Hola</option>
-                                <option value="00000004">Embakasi West</option>
-                                <option value="00000003">Makadara</option>
-                                <option value="00000002">Kisauni</option>
-                                <option value="00000001">Mvita</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="fieldWrapper_group">
-                        <div class="fieldWrapper2">
-                            <label for="ward">Ward</label>
-                            <select class="input" name="ward" required="" id="ward">
-                                <option value=""></option>
-                                <option value="91032732">Old Town</option>
-                                <option value="12121212">Maringo</option>
-                                <option value="11111111">Hamza</option>
-                                <option value="00000001">Hola Township</option>
-                            </select>
-                        </div>
-                    </div>
-            </div>
-        </div>
-
-        <div class="formWrapper">
-            <div class="form">
-                <div class="fieldWrapper">
-                    <label for="photo">Photo</label>
-                    <input type="file" name="photo" class="input" accept="image/*" onchange="loadFile(event)" value="{{ voter.photo }}" required>
-                    <img id="output" src="{% static 'images/user.svg' %}" alt="placeholder"/>
-
-{#                    <img id="output" src="KuraProject{{ voter.photo.url }}" alt="placeholder"/>#}
-{#                    {{ voter.photo.url }}#}
-                    <input type="reset" value="Remove Photo">
                 </div>
             </div>
-        </div>
+            <div class="formWrapper">
+                <div class="form">
+                    <p>Location Details</p>
+                        <div class="fieldWrapper_group">
+                            <div class="fieldWrapper2">
+                                <label for="county">County</label>
+                                <select class="input" name="county" id="county" required>
+                                    <option value="" selected="selected">Select County</option>
+                                </select>
+                            </div>
 
-                <div class="button-parent">
-                    <div class="button-group2">
-                        <a class="submit" href={% url 'vote:bio' %}>BACK</a>
-                        <input id="submit2" type="submit" value="SUBMIT DETAILS"/>
+                            <div class="spacer"></div>
+
+                            <div class="fieldWrapper2">
+                                <label for="constituency">Constituency</label>
+                                <select class="input" name="constituency" id="constituency" required="">
+                                    <option value="" selected="selected"> Select County first</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="fieldWrapper_group">
+                            <div class="fieldWrapper2">
+                                <label for="ward_code">Ward</label>
+                                <select class="input" name="ward_code" id="ward_code" required="">
+                                    <option value="" selected="selected"> Select Ward first</option>
+                                </select>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+            <div class="formWrapper">
+                <div class="form">
+                    <div class="fieldWrapper">
+                        <label for="photo">Photo</label>
+                        <input type="file" name="photo" class="input" accept="image/*" onchange="loadFile(event)" value="{{ voter.photo }}">
+                        <img id="output" src="{{ voter.photo.url }}" alt="placeholder"/>
                     </div>
                 </div>
-                </form>
             </div>
+
+                    <div class="button-parent">
+                        <div class="button-group2">
+                            <a class="submit" href={% url 'vote:bio' %}>BACK</a>
+                            <input id="submit2" type="submit" value="SUBMIT DETAILS"/>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+        </div>
 
 <a href={% url 'vote:success' %}>NEXT</a>
 {% endblock %}

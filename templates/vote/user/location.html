@@ -32,35 +32,22 @@
                 {% csrf_token %}
                     <div class="fieldWrapper">
                         <label for="county">County</label>
-                        <select class="input" name="county" required="" id="county">
-                            <option value="" selected=""></option>
-                            <option value="047">Nairobi</option>
-                            <option value="005">Tana River</option>
-                            <option value="045">Vihiga</option>
-                            <option value="001">Mombasa</option>
+                        <select class="input" name="county" id="county" required>
+                            <option value="" selected="selected">Select County</option>
                         </select>
                     </div>
 
                     <div class="fieldWrapper">
                         <label for="constituency">Constituency</label>
-                        <select class="input" name="constituency" required="" id="constituency">
-                            <option value="" selected=""></option>
-                            <option value="00000005">Hola</option>
-                            <option value="00000004">Embakasi West</option>
-                            <option value="00000003">Makadara</option>
-                            <option value="00000002">Kisauni</option>
-                            <option value="00000001">Mvita</option>
+                        <select class="input" name="constituency" id="constituency" required="">
+                            <option value="" selected="selected"> Select County first</option>
                         </select>
                     </div>
 
                     <div class="fieldWrapper">
-                        <label for="ward_code">Ward</label>
-                        <select class="input" name="ward_code" required="" id="ward_code">
-                            <option value="" selected=""></option>
-                            <option value="91032732">Old Town</option>
-                            <option value="12121212">Maringo</option>
-                            <option value="11111111">Hamza</option>
-                            <option value="00000001">Hola Township</option>
+                        <label for="ward">Ward</label>
+                        <select class="input" name="ward_code" id="ward_code" required="">
+                            <option value="" selected="selected"> Select Ward first</option>
                         </select>
                     </div>
 

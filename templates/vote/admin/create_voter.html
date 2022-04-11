@@ -71,10 +71,7 @@
                 <div class="fieldWrapper2">
                     <label for="county">County</label>
                     <select class="input" name="county" id="county" required>
-                        <option value="" selected=""></option>
-                        {% for county in county %}
-                            <option value={{ county.county_code }}>{{ county.county_name }}</option>
-                        {% endfor %}
+                        <option value="" selected="selected">Select County</option>
                     </select>
                 </div>
 
@@ -83,10 +80,7 @@
                 <div class="fieldWrapper2">
                     <label for="constituency">Constituency</label>
                     <select class="input" name="constituency" id="constituency" required="">
-                        <option value="" selected=""></option>
-                        {% for constituency in constituency %}
-                            <option value={{ constituency.county_code }}>{{ constituency.constituency_name }}</option>
-                        {% endfor %}
+                        <option value="" selected="selected"> Select County first</option>
                     </select>
                 </div>
             </div>
@@ -95,10 +89,7 @@
                 <div class="short">
                     <label for="ward_code">Ward</label>
                     <select class="input" name="ward_code" id="ward_code" required>
-                        <option value="" selected=""></option>
-                        {% for ward in ward %}
-                            <option value={{ ward.ward_code }}>{{ ward.ward_name }}</option>
-                        {% endfor %}
+                        <option value="" selected="selected">Select Constituency first</option>
                     </select>
                 </div>
             </div>

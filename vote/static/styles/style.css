@@ -240,19 +240,18 @@ html,body{
     width: 94%;
     border-radius: 6px;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    padding-top: 12px;
-    padding-bottom: 12px;
-    padding-left: 24px;
-    padding-right: 24px;
+    padding: 12px 24px;
 }
 
 .fieldWrapper #output{
-    width: 200px;
-    height: 200px;
+    width: 120px;
+    height: 120px;
+    display: block;
     border-radius: 8px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     padding: 40px;
-    margin-top: 32px;
+    margin-top: 16px;
+    margin-bottom: 16px;
     background-color: #F1F1F5;
 }
 

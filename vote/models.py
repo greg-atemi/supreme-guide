@@ -3,7 +3,7 @@ from django.db import models
 
 
 class County(models.Model):
-    county_code = models.CharField(max_length=255, primary_key=True, default="")
+    county_code = models.CharField(max_length=255, primary_key=True)
     county_name = models.CharField(max_length=200)
 
     def __str__(self):
@@ -35,7 +35,7 @@ class Voter(models.Model):
     middle_name = models.CharField(max_length=200)
     surname = models.CharField(max_length=200)
     phone_number = models.CharField(max_length=10)
-    photo = models.ImageField(default='car_placeholder.png')
+    photo = models.ImageField(upload_to='media')
 
     Male = 'Male'
     Female = 'Female'
