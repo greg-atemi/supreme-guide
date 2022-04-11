@@ -1,0 +1,52 @@
+{% extends 'vote/admin/admin_base.html' %}
+{% load static %}
+{% block title_block %}
+    <title>Update Ward</title>
+{% endblock %}
+
+{% block body_block %}
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form">
+            <p>Ward</p>
+                <div class="fieldWrapper_group">
+                    <div class="fieldWrapper2">
+                        <label for="ward_code">Ward Code</label>
+                        <input class="input" type="text" name="ward_code" maxlength="8" id="ward_code" readonly value="{{ ward.ward_code }}">
+                    </div>
+
+                    <div class="spacer"></div>
+
+                    <div class="fieldWrapper2">
+                        <label for="ward_name">Ward Name</label>
+                        <input class="input" type="text" name="ward_name" maxlength="200" id="ward_name" required value="{{ ward.ward_name }}">
+                    </div>
+                </div>
+                <div>
+                    <div class="short">
+                        <label for="constituency_code">County</label>
+                        <select class="input" name="constituency_code" id="constituency_code" required>
+                        <option value=""></option>
+                        {% for list_of_constituencies in list_of_constituencies %}
+                            <option value={{ list_of_constituencies.constituency_code }}>{{ list_of_constituencies.constituency_name }}</option>
+                        {% endfor %}
+                    </select>
+
+                    </div>
+
+                    <div>
+                        <span>Current value: {{ ward.constituency_code.constituency_name }}</span>
+                    </div>
+
+                </div>
+        </div>
+
+        <div class="button-group">
+            <input type="reset" class="submit" value="CANCEL CHANGES">
+            <input id="submit2" type="submit" value="SUBMIT"/>
+        </div>
+
+    </form>
+
+{% endblock %}

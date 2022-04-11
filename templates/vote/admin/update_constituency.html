@@ -1,0 +1,51 @@
+{% extends 'vote/admin/admin_base.html' %}
+{% load static %}
+{% block title_block %}
+    <title>Update Constituency</title>
+{% endblock %}
+
+{% block body_block %}
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form">
+            <p>Constituency</p>
+                <div class="fieldWrapper_group">
+                    <div class="fieldWrapper2">
+                        <label for="constituency_code">Constituency Code</label>
+                        <input class="input" type="text" name="constituency_code" maxlength="8" id="constituency_code" readonly value="{{ constituency.constituency_code }}">
+                    </div>
+
+                    <div class="spacer"></div>
+
+                    <div class="fieldWrapper2">
+                        <label for="constituency_name">Constituency Name</label>
+                        <input class="input" type="text" name="constituency_name" maxlength="200" id="constituency_name" required value="{{ constituency.constituency_name }}">
+                    </div>
+                </div>
+                <div>
+                    <div class="short">
+                        <label for="county_code">County</label>
+                        <select class="input" name="county_code" id="county_code" required>
+                        {% for list_of_counties in list_of_counties %}
+                            <option value={{ list_of_counties.county_code }}>{{ list_of_counties.county_name }}</option>
+                        {% endfor %}
+                    </select>
+
+                    </div>
+
+                    <div>
+                        <span>Current value: {{ constituency.county_code.county_name }}</span>
+                    </div>
+
+                </div>
+        </div>
+
+        <div class="button-group">
+            <input type="reset" class="submit" value="CANCEL CHANGES">
+            <input id="submit2" type="submit" value="SUBMIT"/>
+        </div>
+
+    </form>
+
+{% endblock %}
