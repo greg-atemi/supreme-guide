@@ -1,0 +1,35 @@
+{% extends 'vote/admin/admin_base.html' %}
+{% load static %}
+{% block title_block %}
+    <title>Voter Detail</title>
+{% endblock %}
+
+{% block body_block %}
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form">
+            <p>County</p>
+                <div class="fieldWrapper_group">
+                    <div class="fieldWrapper2">
+                        <label for="county_code">County Code</label>
+                        <input class="input" type="text" name="county_code" maxlength="3" id="county_code" required value="{{ county.county_code }}">
+                    </div>
+
+                    <div class="spacer"></div>
+
+                    <div class="fieldWrapper2">
+                        <label for="county_name">County Name</label>
+                        <input class="input" type="text" name="county_name" maxlength="200" id="county_name" required value="{{ county.county_name }}">
+                    </div>
+                </div>
+        </div>
+
+        <div class="button-group">
+            <input type="reset" class="submit" value="CANCEL CHANGES">
+            <input id="submit2" type="submit" value="SUBMIT"/>
+        </div>
+
+    </form>
+
+{% endblock %}
