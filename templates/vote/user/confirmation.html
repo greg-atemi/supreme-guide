@@ -110,7 +110,7 @@
                 <div class="form">
                     <div class="fieldWrapper">
                         <label for="photo">Photo</label>
-                        <input type="file" name="photo" class="input" accept="image/*" onchange="loadFile(event)" value="{{ voter.photo }}">
+                        <input type="file" class="input" name="photo" accept="image/*" onchange="loadFile(event)" value="Add Photo">
                         <img id="output" src="{{ voter.photo.url }}" alt="placeholder"/>
                     </div>
                 </div>
@@ -126,5 +126,13 @@
                 </div>
         </div>
 
-<a href={% url 'vote:success' %}>NEXT</a>
+    <script>
+        var loadFile = function(event) {
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+            URL.revokeObjectURL(output.src)
+            }
+        };
+    </script>
 {% endblock %}

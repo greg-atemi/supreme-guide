@@ -23,7 +23,7 @@
         <div class="formWrapper">
             <div class="form">
                 <p>Personal Details</p>
-                <form action="" method="post">
+                <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                     <div class="fieldWrapper_group">
                         <div class="fieldWrapper2">
@@ -91,7 +91,7 @@
 
                     <div class="fieldWrapper_group">
                         <div class="fieldWrapper2">
-                            <label for="ward">Ward</label>
+                            <label for="ward_code">Ward</label>
                             <select class="input" name="ward_code" id="ward_code" required="">
                                 <option value="{{ voter.ward_code_id }}" selected="selected">{{ voter.ward_code }}</option>
                             </select>
@@ -103,13 +103,9 @@
         <div class="formWrapper">
             <div class="form">
                 <div class="fieldWrapper">
-                    <label for="photo">Photo</label>
-                    <input type="file" class="input" name="image" id="image" accept="image/*">
+                    <label for="image">Photo</label>
+                    <input type="file" class="input" name="image" id="image" accept="image/*" onchange="loadFile(event)" value="Add Photo">
                     <img id="output" src="{{ voter.photo.url }}" alt="Loading..."/>
-{#                     <img id="output" src="{% static 'images/user.svg' %}" alt="placeholder"/>#}
-
-{#                    <img id="output" src="KuraProject{{ voter.photo.url }}" alt="placeholder"/>#}
-{#                    {{ voter.photo.url }}#}
                     <input type="reset" value="Remove Photo">
                 </div>
             </div>
@@ -123,6 +119,16 @@
                 </div>
                 </form>
             </div>
+
+    <script>
+        var loadFile = function(event) {
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+            URL.revokeObjectURL(output.src) // free memory
+            }
+        };
+    </script>
 
 {% endblock %}
 

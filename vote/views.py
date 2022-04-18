@@ -466,7 +466,10 @@ def photo(request, id_serial_number):
             surname = voter.surname
             phone_number = voter.phone_number
             gender = voter.gender
-            photo = request.POST['photo']
+            image = request.FILES['image']
+            fss = FileSystemStorage()
+            file = fss.save(image.name, image)
+            file_url = fss.url(file)
             ward_code = voter.ward_code
 
             my_voter = Voter(id_serial_number=id_serial_number, email_id=email, first_name=first_name,
@@ -490,6 +493,7 @@ def success(request):
         context = {
             'fname': fname
         }
+
     return render(request, 'vote/user/success.html', context)
 
 
@@ -509,16 +513,15 @@ def confirmation(request, id_serial_number):
             surname = request.POST['surname']
             phone_number = request.POST['phone_number']
             gender = voter.gender
-            photo = request.POST['photo']
-
-            if photo == "":
-                photo = voter.photo
-
+            image = request.FILES['image']
+            fss = FileSystemStorage()
+            file = fss.save(image.name, image)
+            file_url = fss.url(file)
             ward_code = request.POST['ward_code']
 
             my_voter = Voter(id_serial_number=id_serial_number, email_id=email, first_name=first_name,
                              middle_name=middle_name, surname=surname, phone_number=phone_number,
-                             gender=gender, photo=photo, ward_code_id=ward_code)
+                             gender=gender, photo=image, ward_code_id=ward_code)
 
             my_voter.save()
 
@@ -674,32 +677,6 @@ def update_details_auth(request):
     return render(request, 'vote/user/update_details_auth.html', context)
 
 
-# def update_details_auth(request):
-#     if request.user.is_authenticated:
-#         fname = request.user.first_name
-#         context = {
-#             'fname': fname
-#         }
-#         if request.method == "POST":
-#             email1 = request.POST['email']
-#             id_serial_number = request.POST['id_serial_number']
-#             voter = Voter.objects.select_related('email__voter').get(id_serial_number=id_serial_number)
-#             email2 = voter.email.email
-#             email3 = request.user.email
-#
-#             if email1 == email2 and email2 == email3 and email1 == email3:
-#                 return redirect('vote:update_details', id_serial_number)
-#
-#             else:
-#                 messages.error(request, "Invalid details, please Login and try again")
-#                 return redirect('vote:log_out')
-#     else:
-#         messages.info(request, "Login to continue")
-#         return redirect('vote:login')
-#
-#     return render(request, 'vote/user/update_details_auth.html', context)
-
-
 def update_details(request, id_serial_number):
     if request.user.is_authenticated:
         fname = request.user.first_name
@@ -722,7 +699,10 @@ def update_details(request, id_serial_number):
             surname = voter.surname
             phone_number = request.POST['phone_number']
             gender = voter.gender
-            image = request.POST['image']
+            image = request.FILES['image']
+            fss = FileSystemStorage()
+            file = fss.save(image.name, image)
+            file_url = fss.url(file)
             ward_code = request.POST['ward_code']
 
             my_voter = Voter(id_serial_number=id_serial_number, email_id=email, first_name=first_name,
@@ -738,6 +718,47 @@ def update_details(request, id_serial_number):
         return redirect('vote:login')
 
     return render(request, 'vote/user/update_details.html', context)
+
+
+# def update_details(request, id_serial_number):
+#     if request.user.is_authenticated:
+#         fname = request.user.first_name
+#         voter = Voter.objects.get(id_serial_number=id_serial_number)
+#         county = County.objects.all()
+#         constituency = Constituency.objects.all()
+#         ward = Ward.objects.all()
+#         context = {
+#             'fname': fname,
+#             'voter': voter,
+#             'county': county,
+#             'constituency': constituency,
+#             'ward': ward
+#         }
+#         if request.method == "POST":
+#             id_serial_number = voter.id_serial_number
+#             email = request.user.id
+#             first_name = voter.first_name
+#             middle_name = voter.middle_name
+#             surname = voter.surname
+#             phone_number = request.POST['phone_number']
+#             gender = voter.gender
+#             image = request.POST['image']
+#             ward_code = request.POST['ward_code']
+#
+#             my_voter = Voter(id_serial_number=id_serial_number, email_id=email, first_name=first_name,
+#                              middle_name=middle_name, surname=surname, phone_number=phone_number,
+#                              gender=gender, photo=image, ward_code_id=ward_code)
+#
+#             my_voter.save()
+#
+#             return redirect('vote:success')
+#
+#     else:
+#         messages.info(request, "Login to continue")
+#         return redirect('vote:login')
+#
+#     return render(request, 'vote/user/update_details.html', context)
+
 
 
 def update_county(request, county_code):
