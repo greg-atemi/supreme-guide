@@ -6,7 +6,17 @@
 
 {% block body_block %}
     <div class="parent2">
-        <div class="title">
+
+        <div class="content2">
+            {% for message in messages %}
+                <div class="message">
+                    <h3>Error:</h3> {{ message }}
+                </div>
+            <br>
+            {% endfor %}
+        </div>
+
+        <div class="title2">
             Update Registration Details
         </div>
 
@@ -37,12 +47,11 @@
                     </div>
 
                     <div class="button-group">
-                        <input type="reset" class="submit" value="CLEAR">
+                        <a class="submit" href={% url 'vote:index' %}> BACK </a>
                         <input id="submit2" type="submit" value="NEXT"/>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-<a href={% url 'vote:auth2' %}>NEXT</a>
 {% endblock %}

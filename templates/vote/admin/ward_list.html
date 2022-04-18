@@ -23,6 +23,8 @@
                 <th class="head-item">NO. OF VOTERS</th>
                 <th class="head-item">CONSTITUENCY</th>
                 <th class="head-item">COUNTY</th>
+                <th class="head-item"></th>
+                <th class="head-item"></th>
             </tr>
         </thead>
         <tbody>
@@ -33,6 +35,8 @@
                     <td class="cell">65000</td>
                     <td class="cell">{{ ward.constituency_code }}</td>
                     <td class="cell">{{ ward.constituency_code.county_code }}</td>
+                    <td class="cell" id="table1"><a class="action2" href="{% url 'vote:update_ward' ward.ward_code %}">Update</a></td>
+                    <td class="cell" id="table1"><a class="action" href="{% url 'vote:delete_ward' ward.ward_code %}">Delete</a></td>
                 </tr>
             {% endfor %}
         </tbody>

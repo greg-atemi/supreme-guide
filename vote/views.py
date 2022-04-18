@@ -351,8 +351,6 @@ def ward_detail(request):
 
             myward.save()
 
-            messages.success(request, "Ward added successfully.")
-
             return redirect('vote:ward_list')
 
     else:
@@ -725,7 +723,7 @@ def update_county(request, county_code):
 
             mycounty = County(county_code=code, county_name=name)
             mycounty.save()
-            
+
             return redirect('vote:county_list')
     else:
         messages.info(request, "Login to continue")
@@ -751,7 +749,110 @@ def delete_county(request, county_code):
     else:
         messages.info(request, "Login to continue")
         return redirect('vote:admin_login')
+
     return render(request, 'vote/admin/delete_county.html', context)
+
+
+def update_constituency(request, constituency_code):
+    if request.user.is_authenticated and request.user.is_staff:
+        fname = request.user.first_name
+        lname = request.user.last_name
+        list_of_counties = County.objects.all
+        constituency = Constituency.objects.get(constituency_code=constituency_code)
+        context = {
+            'fname': fname,
+            'lname': lname,
+            'constituency': constituency,
+            'list_of_counties': list_of_counties
+        }
+
+        if request.method == "POST":
+            code = request.POST['constituency_code']
+            name = request.POST['constituency_name']
+            county_code = request.POST['county_code']
+            county = County.objects.get(county_code=county_code)
+
+            myconstituency = Constituency(constituency_code=code, constituency_name=name, county_code=county)
+            myconstituency.save()
+
+            return redirect('vote:constituency_list')
+    else:
+        messages.info(request, "Login to continue")
+        return redirect('vote:admin_login')
+
+    return render(request, 'vote/admin/update_constituency.html', context)
+
+
+def delete_constituency(request, constituency_code):
+    if request.user.is_authenticated and request.user.is_staff:
+        fname = request.user.first_name
+        lname = request.user.last_name
+        constituency = Constituency.objects.get(constituency_code=constituency_code)
+        context = {
+            'fname': fname,
+            'lname': lname,
+            'constituency': constituency
+        }
+
+        if request.method == "POST":
+            constituency.delete()
+            return redirect('vote:constituency_list')
+    else:
+        messages.info(request, "Login to continue")
+        return redirect('vote:admin_login')
+
+    return render(request, 'vote/admin/delete_constituency.html', context)
+
+
+def update_ward(request, ward_code):
+    if request.user.is_authenticated and request.user.is_staff:
+        fname = request.user.first_name
+        lname = request.user.last_name
+        list_of_constituencies = Constituency.objects.all
+        ward = Ward.objects.get(ward_code=ward_code)
+        context = {
+            'fname': fname,
+            'lname': lname,
+            'ward': ward,
+            'list_of_constituencies': list_of_constituencies
+        }
+
+        if request.method == "POST":
+            code = request.POST['ward_code']
+            name = request.POST['ward_name']
+            constituency_code = request.POST['constituency_code']
+            constituency = Constituency.objects.get(constituency_code=constituency_code)
+
+            myward = Ward(ward_code=code, ward_name=name, constituency_code=constituency)
+            myward.save()
+
+            return redirect('vote:ward_list')
+    else:
+        messages.info(request, "Login to continue")
+        return redirect('vote:admin_login')
+
+    return render(request, 'vote/admin/update_ward.html', context)
+
+
+def delete_ward(request, ward_code):
+    if request.user.is_authenticated and request.user.is_staff:
+        fname = request.user.first_name
+        lname = request.user.last_name
+        ward = Ward.objects.get(ward_code=ward_code)
+        context = {
+            'fname': fname,
+            'lname': lname,
+            'ward': ward
+        }
+
+        if request.method == "POST":
+            ward.delete()
+            return redirect('vote:ward_list')
+    else:
+        messages.info(request, "Login to continue")
+        return redirect('vote:admin_login')
+
+    return render(request, 'vote/admin/delete_ward.html', context)
 
 
 def auth2(request):
@@ -760,3 +861,5 @@ def auth2(request):
 
 def auth3(request):
     return render(request, 'vote/user/auth3.html')
+
+

@@ -4,6 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/static/styles/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,6 +37,15 @@
         </ul>
     </div>
 
+    <div class="navbar_small">
+        <div>
+            <img class="brand_small" src="{% static 'images/logo.svg' %}" alt="logo">
+        </div>
+        <div>
+            <img class="burger" src="{% static 'images/logo.svg' %}" alt="logo">
+        </div>
+    </div>
+
     {% block body_block %}
     {% endblock %}
 
@@ -52,17 +62,30 @@
                 <div id="header">Services</div>
                 <ul id="content">
                     <li><a href={% url 'vote:bio' %}>Voter Registration</a></li>
-                    <li><a href={% url 'vote:check_details_auth' %}>Check Registration Status</a></li>
                     <li><a href={% url 'vote:update_details_auth' %}>Update Registration</a></li>
+                    <li><a href={% url 'vote:check_details_auth' %}>Check Registration Status</a></li>
                 </ul>
             </div>
-            <div id="bottom-wrapper">
-                <div id="header">Our Newsletter</div>
-                    <form>
-                        <input placeholder="johndoe@mail.com">
-                        <button class="sub-btn">Subscribe</button>
-                    </form>
+
+            <div id="right-bottom-wrapper">
+                <div id="header">Follow Us</div>
+                <div id="icons">
+                    <div class="first">
+                        <img alt="facebook" src="{% static 'images/youtube.svg' %}">
+                    </div>
+                    <div class="first">
+                        <img alt="twitter" src="{% static 'images/facebook.svg' %}">
+                    </div>
+                    <div class="first">
+                        <img alt="instagram" src="{% static 'images/instagram.svg' %}">
+                    </div>
+                    <div class="last">
+                        <img alt="email" src="{% static 'images/twitter.svg' %}">
+                    </div>
+                </div>
             </div>
+
+
         </div>
         <div class="content-footer">
             <div id="wrapper">
@@ -73,23 +96,21 @@
                     <li><a href="#">Our Leaders</a></li>
                 </ul>
             </div>
-            <div id="right-bottom-wrapper">
-                <div id="header">Follow Us</div>
-                <div id="icons">
-                    <div on:click={Youtube}>
-                        <img alt="facebook" src="{% static 'images/youtube.svg' %}">
-                    </div>
-                    <div on:click={Facebook}>
-                        <img alt="twitter" src="{% static 'images/facebook.svg' %}">
-                    </div>
-                    <div on:click={Instagram}>
-                        <img alt="instagram" src="{% static 'images/instagram.svg' %}">
-                    </div>
-                    <div on:click={Twitter}>
-                        <img alt="email" src="{% static 'images/twitter.svg' %}">
+
+            <div id="bottom-wrapper">
+                <div id="header">
+                    <div>
+                        Our Newsletter
                     </div>
                 </div>
+                <form>
+                    <input placeholder="johndoe@mail.com">
+                    <button class="sub-btn">Subscribe</button>
+                </form>
             </div>
+
+
+
         </div>
     </div>
 

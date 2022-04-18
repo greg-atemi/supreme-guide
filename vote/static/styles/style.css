@@ -369,6 +369,22 @@ html,body{
     font-family: Inter, sans-serif;
 }
 
+.button-group .submit{
+    font-size: 16px;
+    padding: 12px 36px;
+    width: auto;
+    height: auto;
+    color: #000000;
+    background-color: #D1CFDD;
+    border: 1px solid #D1D5DB;
+    outline: none;
+    cursor: pointer;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    font-family: Inter, sans-serif;
+}
+
 .form label{
     color: #171154;
     font-size: 20px;
@@ -426,11 +442,12 @@ html,body{
     margin-top: 64px;
     border: 1px hidden #171154;
     border-bottom-style: solid;
-    margin-bottom: 80px;
+    width: 80%;
 }
 
 .content-footer #right-bottom-wrapper{
     margin-top: 64px;
+    margin-bottom: 80px;
 }
 
 .content-footer #bottom-wrapper div{
@@ -441,15 +458,19 @@ html,body{
     display: flex;
 }
 
+.first{
+    display: flex;
+    margin-right: 24px;
+}
+
+.last{
+    margin-right: 0;
+}
+
 .content-footer #bottom-wrapper form{
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-#icons div{
-    display: flex;
-    margin-right: 24px;
 }
 
 .content-footer #bottom-wrapper input{
@@ -536,4 +557,331 @@ html,body{
 .message{
     font-family: Inter, sans-serif;
     font-size: 16px;
+}
+
+.navbar_small{
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+    .navbar{
+        display: none;
+    }
+
+    .navbar_small{
+        display: flex;
+        justify-content: space-between;
+        background-color: #FFFFFF;
+    }
+
+    .brand_small{
+        height: 40px;
+        width: 40px;
+        margin-left: 16px;
+        margin-top: 4px;
+        margin-bottom: 4px;
+    }
+
+    .burger{
+        height: 40px;
+        width: 40px;
+        margin-right: 16px;
+        margin-top: 4px;
+        margin-bottom: 4px;
+    }
+
+    .footer{
+        background-color: #FFFFFF;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .brand-footer{
+        display: none;
+    }
+
+    .footer .map{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .footer .map img{
+        width: 240px;
+        height: 320px;
+    }
+
+    .footer .content-footer{
+        width: 100%;
+        padding-left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .content-footer #wrapper{
+        margin-top: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .content-footer #content{
+        list-style-type: none;
+        font-size: 16px;
+        font-family: Open Sans, sans-serif;
+        color: #171154;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .content-footer #bottom-wrapper form{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .content-footer #bottom-wrapper div{
+        display: flex;
+        align-items: center;
+        margin-left: 15%;
+    }
+
+    .content-footer #right-bottom-wrapper {
+        margin-top: 40px;
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+        margin-bottom: 0;
+    }
+
+    .content-footer #bottom-wrapper {
+        margin-top: 40px;
+        margin-bottom: 80px;
+        border: 1px hidden #171154;
+        border-bottom-style: solid;
+        width: 60%;
+    }
+
+    .first{
+        display: flex;
+        margin-right: 64px;
+    }
+
+    .last{
+        margin-right: 0;
+    }
+
+    .title{
+      display: flex;
+      justify-content: flex-start;
+      margin-top: 24px;
+      margin-left: 20px;
+      font-family: Lato, sans-serif;
+      font-weight: bold;
+      font-size: 20px;
+      color: #171154;
+    }
+
+    .title2{
+      display: flex;
+      justify-content: center;
+      margin-top: 24px;
+      font-family: Lato, sans-serif;
+      font-weight: bold;
+      font-size: 20px;
+      color: #171154;
+    }
+
+    .content{
+        margin-left: 20px;
+        margin-right: 12px;
+        margin-top: 16px;
+        color: #171154;
+        font-size: 16px;
+        font-family: Lato, sans-serif;
+    }
+
+    .list{
+        margin-left: 20px;
+        margin-top: 20px;
+        color: #171154;
+        font-size: 16px;
+        font-family: Lato, sans-serif;
+    }
+
+    .content-title{
+        margin-left: 20px;
+        margin-top: 20px;
+        color: #171154;
+        font-size: 16px;
+        font-family: Lato, sans-serif;
+        font-weight: bold;
+    }
+
+    .long-list{
+        display: flex;
+        justify-content: flex-start;
+        margin-top: 20px;
+        margin-left: 20px;
+        margin-right: 20px;
+        width: 100%;
+        color: #171154;
+        font-size: 16px;
+        font-family: Lato, sans-serif;
+    }
+
+    .parent2 {
+        width: 100%;
+        background-color: #FBFBFB;
+        padding-bottom: 40px;
+    }
+
+    .button-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 40px;
+    }
+
+    .submit{
+        font-size: 12px;
+        padding: 12px 36px;
+        width: 50%;
+        color: #000000;
+        background-color: #D1CFDD;
+        border: 1px solid #D1D5DB;
+        outline: none;
+        cursor: pointer;
+        border-radius: 8px;
+        text-align: center;
+        text-decoration: none;
+        font-family: Inter, sans-serif;
+    }
+
+    .submit_small{
+        font-size: 12px;
+        padding: 12px 36px;
+        width: 50%;
+        color: #000000;
+        background-color: #D1CFDD;
+        border: 1px solid #D1D5DB;
+        outline: none;
+        cursor: pointer;
+        border-radius: 8px;
+        text-align: center;
+        text-decoration: none;
+        font-family: Inter, sans-serif;
+    }
+
+    .submit2, #submit2 {
+        font-size: 12px;
+        width: 50%;
+        padding: 12px 36px;
+        color: #FFFFFF;
+        background-color: #171154;
+        border: 1px solid #D1D5DB;
+        outline: none;
+        cursor: pointer;
+        border-radius: 8px;
+        text-align: center;
+        text-decoration: none;
+        font-family: Inter, sans-serif;
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
+
+    .footer .map {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 24px;
+    }
+
+    .content2 div {
+        margin-top: 20px;
+        color: #171154;
+        font-size: 16px;
+        font-family: Lato, sans-serif;
+        margin-left: 32px;
+        margin-right: 20px;
+    }
+
+    .formWrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+        margin-bottom: 16px;
+    }
+
+    .form {
+        padding: 24px;
+        background-color: #FFFFFF;
+        border-radius: 16px;
+        width: 75%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .form label {
+        color: #171154;
+        font-size: 16px;
+        font-family: Lato, sans-serif;
+    }
+
+    .fieldWrapper input {
+        font-family: Lato, sans-serif;
+        width: 90%;
+        border-radius: 6px;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        padding: 12px 12px;
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 0;
+        margin-top: 32px;
+    }
+
+    .button-group .submit{
+        font-size: 16px;
+        padding: 12px 36px;
+        width: 15%;
+        color: #171154;
+        background-color: #D1CFDD;
+        border: 1px solid #D1D5DB;
+        outline: none;
+        cursor: pointer;
+        border-radius: 8px;
+        text-align: center;
+        text-decoration: none;
+        font-family: Inter, sans-serif;
+    }
+
+    .button-group #submit2{
+        font-size: 16px;
+        width: 40%;
+        padding: 12px 36px;
+        color: #FFFFFF;
+        background-color: #171154;
+        border: 1px solid #D1D5DB;
+        outline: none;
+        cursor: pointer;
+        border-radius: 8px;
+        text-align: center;
+        text-decoration: none;
+        font-family: Inter, sans-serif;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .list-container{
+        display: flex;
+        justify-content: flex-start;
+    }
 }
