@@ -75,7 +75,7 @@
                         <div class="fieldWrapper2">
                             <label for="county">County</label>
                             <select class="input" name="county" id="county" required>
-                                <option value="" selected="selected">Select County</option>
+                                <option value="{{ voter.ward_code.constituency_code.county_code }}" selected="selected"> {{ voter.ward_code.constituency_code.county_code }} </option>
                             </select>
                         </div>
 
@@ -84,7 +84,7 @@
                         <div class="fieldWrapper2">
                             <label for="constituency">Constituency</label>
                             <select class="input" name="constituency" id="constituency" required="">
-                                <option value="" selected="selected"> Select County first</option>
+                                <option value="{{ voter.ward_code.constituency_code}}" selected="selected"> {{ voter.ward_code.constituency_code}} </option>
                             </select>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                         <div class="fieldWrapper2">
                             <label for="ward">Ward</label>
                             <select class="input" name="ward_code" id="ward_code" required="">
-                                <option value="" selected="selected"> Select Ward first</option>
+                                <option value="{{ voter.ward_code_id }}" selected="selected">{{ voter.ward_code }}</option>
                             </select>
                         </div>
                     </div>

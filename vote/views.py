@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail, EmailMessage
 from django.shortcuts import render, redirect
@@ -16,7 +17,7 @@ from django.core.files.storage import FileSystemStorage
 
 
 def index(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request.user.is_active:
         fname = request.user.first_name
         context = {
             'fname': fname
@@ -118,7 +119,7 @@ def admin_login(request):
             return redirect('vote:dashboard')
 
         else:
-            messages.error(request, "Your Username or Password is incorrect")
+            messages.error(request, "Username or Password is incorrect")
             return redirect('vote:admin_login')
 
     return render(request, 'vote/admin/login_admin.html')
@@ -137,7 +138,7 @@ def login(request):
             return redirect('vote:index')
 
         else:
-            messages.error(request, "Your Username or Password is incorrect")
+            messages.error(request, "Username or Password is incorrect")
 
     return render(request, 'vote/user/login.html')
 
@@ -191,6 +192,7 @@ def dashboard(request):
     return render(request, 'vote/admin/dashboard.html', context)
 
 
+@login_required
 def user_account(request):
     uname = request.user.username
     fname = request.user.first_name
@@ -597,7 +599,6 @@ def check_details_auth(request):
         }
 
         if request.method == "POST":
-            # email1 = request.POST['email']
 
             id_serial_number = request.POST['id_serial_number']
             try:
@@ -608,9 +609,6 @@ def check_details_auth(request):
 
             email2 = voter.email.email
             email3 = request.user.email
-
-            # if email1 == email2 and email2 == email3 and email1 == email3:
-            #     return redirect('vote:voter_details', id_serial_number)
 
             if email2 == email3:
                 return redirect('vote:voter_details', id_serial_number)
@@ -646,27 +644,60 @@ def voter_details(request, id_serial_number):
 def update_details_auth(request):
     if request.user.is_authenticated:
         fname = request.user.first_name
+
         context = {
             'fname': fname
         }
+
         if request.method == "POST":
-            email1 = request.POST['email']
+
             id_serial_number = request.POST['id_serial_number']
-            voter = Voter.objects.select_related('email__voter').get(id_serial_number=id_serial_number)
+            try:
+                voter = Voter.objects.select_related('email__voter').get(id_serial_number=id_serial_number)
+            except Voter.DoesNotExist:
+                messages.error(request, "Invalid details, please try again")
+                return redirect('vote:update_details_auth')
+
             email2 = voter.email.email
             email3 = request.user.email
 
-            if email1 == email2 and email2 == email3 and email1 == email3:
+            if email2 == email3:
                 return redirect('vote:update_details', id_serial_number)
 
             else:
-                messages.error(request, "Invalid details, please Login and try again")
-                return redirect('vote:log_out')
+                messages.error(request, "Invalid details, please try again")
+                return redirect('vote:update_details_auth')
     else:
         messages.info(request, "Login to continue")
         return redirect('vote:login')
 
     return render(request, 'vote/user/update_details_auth.html', context)
+
+
+# def update_details_auth(request):
+#     if request.user.is_authenticated:
+#         fname = request.user.first_name
+#         context = {
+#             'fname': fname
+#         }
+#         if request.method == "POST":
+#             email1 = request.POST['email']
+#             id_serial_number = request.POST['id_serial_number']
+#             voter = Voter.objects.select_related('email__voter').get(id_serial_number=id_serial_number)
+#             email2 = voter.email.email
+#             email3 = request.user.email
+#
+#             if email1 == email2 and email2 == email3 and email1 == email3:
+#                 return redirect('vote:update_details', id_serial_number)
+#
+#             else:
+#                 messages.error(request, "Invalid details, please Login and try again")
+#                 return redirect('vote:log_out')
+#     else:
+#         messages.info(request, "Login to continue")
+#         return redirect('vote:login')
+#
+#     return render(request, 'vote/user/update_details_auth.html', context)
 
 
 def update_details(request, id_serial_number):
@@ -694,11 +725,14 @@ def update_details(request, id_serial_number):
             image = request.POST['image']
             ward_code = request.POST['ward_code']
 
-            Voter.objects.update(id_serial_number=id_serial_number, email_id=email, first_name=first_name,
-                                 middle_name=middle_name, surname=surname, phone_number=phone_number,
-                                 gender=gender, photo=image, ward_code_id=ward_code)
+            my_voter = Voter(id_serial_number=id_serial_number, email_id=email, first_name=first_name,
+                             middle_name=middle_name, surname=surname, phone_number=phone_number,
+                             gender=gender, photo=image, ward_code_id=ward_code)
+
+            my_voter.save()
 
             return redirect('vote:success')
+
     else:
         messages.info(request, "Login to continue")
         return redirect('vote:login')

@@ -59,6 +59,16 @@ html,body{
     color: #171154;
 }
 
+.title2{
+      display: flex;
+      justify-content: center;
+      margin-top: 32px;
+      font-family: Lato, sans-serif;
+      font-weight: bold;
+      font-size: 32px;
+      color: #171154;
+}
+
 .content{
     margin-left: 25%;
     margin-top: 20px;
