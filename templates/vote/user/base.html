@@ -16,7 +16,10 @@
 <body>
 <div class="parent">
     <div class="navbar">
-        <img class="brand" src="{% static 'images/logo.svg' %}" alt="logo">
+
+        <a href="{% url 'vote:index' %}">
+            <img class="brand" src="{% static 'images/logo.svg' %}" alt="logo">
+        </a>
         <ul>
             <li><a href="/vote">HOME</a> </li>
             <li><a href="#">LANGUAGE</a> </li>
@@ -39,10 +42,14 @@
 
     <div class="navbar_small">
         <div>
-            <img class="brand_small" src="{% static 'images/logo.svg' %}" alt="logo">
+            <a href="{% url 'vote:index' %}">
+                <img class="brand_small" src="{% static 'images/logo.svg' %}" alt="logo">
+            </a>
         </div>
         <div>
-            <img class="burger" src="{% static 'images/logo.svg' %}" alt="logo">
+            <a href="{% url 'vote:user_account' %}">
+                <img class="burger" src="{% static 'images/user.svg' %}" alt="logo">
+            </a>
         </div>
     </div>
 
@@ -108,8 +115,6 @@
                     <button class="sub-btn">Subscribe</button>
                 </form>
             </div>
-
-
 
         </div>
     </div>

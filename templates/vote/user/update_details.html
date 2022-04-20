@@ -6,7 +6,7 @@
 
 {% block body_block %}
     <div class="parent2">
-        <div class="title">
+        <div class="title2">
             Update Details
         </div>
 
@@ -106,14 +106,14 @@
                     <label for="image">Photo</label>
                     <input type="file" class="input" name="image" id="image" accept="image/*" onchange="loadFile(event)" value="Add Photo">
                     <img id="output" src="{{ voter.photo.url }}" alt="Loading..."/>
-                    <input type="reset" value="Remove Photo">
+                    <span>To Reset picture kindly refresh the page</span>
                 </div>
             </div>
         </div>
 
                 <div class="button-parent">
                     <div class="button-group2">
-                        <a class="submit" href={% url 'vote:bio' %}>BACK</a>
+                        <a class="submit" href={% url 'vote:index' %}>BACK</a>
                         <input id="submit2" type="submit" value="SUBMIT DETAILS"/>
                     </div>
                 </div>
