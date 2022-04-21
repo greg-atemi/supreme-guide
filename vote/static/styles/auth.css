@@ -177,3 +177,87 @@ html,body{
     font-size: 16px;
 }
 
+@media only screen and (max-width: 768px) {
+    .parent{
+        display: block;
+    }
+
+    .image {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #FFFFFF;
+        width: 100%;
+        height: auto;
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+
+    .image img{
+        width: 100px;
+        height: 100px;
+    }
+
+    .form {
+        margin-left: 40px;
+        margin-right: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #FFFFFF;
+        width: auto;
+        height: auto;
+    }
+
+    .form h1{
+        display: flex;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .options {
+        margin-left: 0;
+    }
+
+    .submit{
+        margin-left: 0;
+    }
+
+    .field input{
+        width: 300px;
+        padding-right: 16px;
+    }
+
+    .form-large{
+        margin-left: 40px;
+        margin-right: 40px;
+        height: auto;
+        width: auto;
+        padding-top: 0;
+    }
+
+    .form-large h1{
+        font-size: 24px;
+    }
+
+    .form-narrow{
+        margin-left: 40px;
+        margin-right: 40px;
+        height: auto;
+        width: auto;
+    }
+
+    .form-narrow h1{
+        font-size: 24px;
+    }
+
+    .form-narrow form{
+        width: 100%;
+    }
+
+    .button-container a{
+        width: auto;
+    }
+}

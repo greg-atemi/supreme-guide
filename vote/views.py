@@ -439,7 +439,6 @@ def location(request, id_serial_number):
                             gender=gender, photo=photo, ward_code_id=ward_code)
 
             myvoter.save()
-            # myvoter.save(force_update=True)
 
             return redirect('vote:photo', id_serial_number)
 
