@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.png'%}">
     <link rel="stylesheet" type="text/css" href="/static/styles/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,9 +23,6 @@
         </a>
         <ul>
             <li><a href="/vote">HOME</a> </li>
-            <li><a href="#">LANGUAGE</a> </li>
-            <li><a href="#">SERVICES</a> </li>
-            <li><a href="#">ABOUT</a> </li>
             <li><a href="#">CONTACT</a> </li>
             <li>
                 {% if user.is_authenticated %}

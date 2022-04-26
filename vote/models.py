@@ -35,7 +35,7 @@ class Voter(models.Model):
     middle_name = models.CharField(max_length=200)
     surname = models.CharField(max_length=200)
     phone_number = models.CharField(max_length=10)
-    photo = models.ImageField(upload_to='media')
+    photo = models.ImageField(upload_to='media', default='user.svg')
 
     Male = 'Male'
     Female = 'Female'

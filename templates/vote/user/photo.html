@@ -27,12 +27,12 @@
         </div>
         <div class="formWrapper">
             <div class="form">
-                <form action="" method="post">
+                <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                     <div class="fieldWrapper">
                         <label for="photo">Photo</label>
-                        <label for="photo">Click the button below and choose an appropriate portrait image of you</label>
-                        <input type="file" class="input" name="photo" accept="image/*" onchange="loadFile(event)" value="Add Photo">
+                        <label for="image">Click the button below and choose an appropriate portrait image of you</label>
+                        <input type="file" class="input" name="image" id="image" accept="image/*" onchange="loadFile(event)" value="Add Photo">
                         <img id="output" src="{% static 'images/user.svg' %}" alt="default"/>
 
                     </div>

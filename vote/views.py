@@ -8,12 +8,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.template.loader import render_to_string
+from django.utils.datastructures import MultiValueDictKeyError
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from vote.models import County, Constituency, Ward, Voter
 from KuraProject import settings
 from vote.tokens import generate_token
-from django.core.files.storage import FileSystemStorage
 
 
 def index(request):
@@ -81,13 +81,13 @@ def signup(request):
         to_list = [
             myuser.email
         ]
-        send_mail(subject, message, from_email, to_list, fail_silently=False)
+        send_mail(subject, message, from_email, to_list, fail_silently=True)
 
         # Email Address Confirmation Email
 
         current_site = get_current_site(request)
         email_subject = "Confirm your email"
-        message2 = render_to_string("vote/admin/email_confirmation.html", {
+        message2 = render_to_string("vote/auth/email_confirmation.html", {
             'name': myuser.first_name,
             'domain': current_site.domain,
             'uid': urlsafe_base64_encode(force_bytes(myuser.pk)),
@@ -104,7 +104,7 @@ def signup(request):
 
         return redirect('vote:login')
 
-    return render(request, 'vote/user/signup.html')
+    return render(request, 'vote/auth/signup.html')
 
 
 def admin_login(request):
@@ -122,7 +122,7 @@ def admin_login(request):
             messages.error(request, "Username or Password is incorrect")
             return redirect('vote:admin_login')
 
-    return render(request, 'vote/admin/login_admin.html')
+    return render(request, 'vote/auth/login_admin.html')
 
 
 def login(request):
@@ -140,7 +140,7 @@ def login(request):
         else:
             messages.error(request, "Username or Password is incorrect")
 
-    return render(request, 'vote/user/login.html')
+    return render(request, 'vote/auth/login.html')
 
 
 def admin_log_out(request):
@@ -150,7 +150,7 @@ def admin_log_out(request):
 
 def log_out(request):
     logout(request)
-    return render(request, 'vote/user/logout.html')
+    return render(request, 'vote/auth/logout.html')
 
 
 def activate(request, uidb64, token):
@@ -166,11 +166,11 @@ def activate(request, uidb64, token):
         myuser.save()
         return redirect('vote:login')
     else:
-        return render(request, 'vote/admin/activation_failed.html')
+        return render(request, 'vote/auth/activation_failed.html')
 
 
 def activation_failed(request):
-    return render(request, 'vote/admin/activation_failed.html')
+    return render(request, 'vote/auth/activation_failed.html')
 
 
 def dashboard(request):
@@ -465,15 +465,17 @@ def photo(request, id_serial_number):
             surname = voter.surname
             phone_number = voter.phone_number
             gender = voter.gender
-            image = request.FILES['image']
-            fss = FileSystemStorage()
-            file = fss.save(image.name, image)
-            file_url = fss.url(file)
+
+            try:
+                image = request.FILES['image']
+            except MultiValueDictKeyError:
+                image = voter.photo
+
             ward_code = voter.ward_code
 
             my_voter = Voter(id_serial_number=id_serial_number, email_id=email, first_name=first_name,
                              middle_name=middle_name, surname=surname, phone_number=phone_number,
-                             gender=gender, photo=photo, ward_code_id=ward_code)
+                             gender=gender, photo=image, ward_code_id=ward_code)
 
             my_voter.save()
 
@@ -512,10 +514,12 @@ def confirmation(request, id_serial_number):
             surname = request.POST['surname']
             phone_number = request.POST['phone_number']
             gender = voter.gender
-            image = request.FILES['image']
-            fss = FileSystemStorage()
-            file = fss.save(image.name, image)
-            file_url = fss.url(file)
+
+            try:
+                image = request.FILES['image']
+            except MultiValueDictKeyError:
+                image = voter.photo
+
             ward_code = request.POST['ward_code']
 
             my_voter = Voter(id_serial_number=id_serial_number, email_id=email, first_name=first_name,
@@ -691,18 +695,27 @@ def update_details(request, id_serial_number):
             'ward': ward
         }
         if request.method == "POST":
-            id_serial_number = voter.id_serial_number
-            email = request.user.id
-            first_name = voter.first_name
-            middle_name = voter.middle_name
-            surname = voter.surname
-            phone_number = request.POST['phone_number']
-            gender = voter.gender
-            image = request.FILES['image']
-            fss = FileSystemStorage()
-            file = fss.save(image.name, image)
-            file_url = fss.url(file)
-            ward_code = request.POST['ward_code']
+            try:
+                id_serial_number = voter.id_serial_number
+                email = request.user.id
+                first_name = voter.first_name
+                middle_name = voter.middle_name
+                surname = voter.surname
+                phone_number = request.POST['phone_number']
+                gender = voter.gender
+                ward_code = request.POST['ward_code']
+                image = request.FILES['image']
+
+            except MultiValueDictKeyError:
+                id_serial_number = voter.id_serial_number
+                email = request.user.id
+                first_name = voter.first_name
+                middle_name = voter.middle_name
+                surname = voter.surname
+                phone_number = request.POST['phone_number']
+                gender = voter.gender
+                ward_code = request.POST['ward_code']
+                image = voter.photo
 
             my_voter = Voter(id_serial_number=id_serial_number, email_id=email, first_name=first_name,
                              middle_name=middle_name, surname=surname, phone_number=phone_number,
@@ -717,47 +730,6 @@ def update_details(request, id_serial_number):
         return redirect('vote:login')
 
     return render(request, 'vote/user/update_details.html', context)
-
-
-# def update_details(request, id_serial_number):
-#     if request.user.is_authenticated:
-#         fname = request.user.first_name
-#         voter = Voter.objects.get(id_serial_number=id_serial_number)
-#         county = County.objects.all()
-#         constituency = Constituency.objects.all()
-#         ward = Ward.objects.all()
-#         context = {
-#             'fname': fname,
-#             'voter': voter,
-#             'county': county,
-#             'constituency': constituency,
-#             'ward': ward
-#         }
-#         if request.method == "POST":
-#             id_serial_number = voter.id_serial_number
-#             email = request.user.id
-#             first_name = voter.first_name
-#             middle_name = voter.middle_name
-#             surname = voter.surname
-#             phone_number = request.POST['phone_number']
-#             gender = voter.gender
-#             image = request.POST['image']
-#             ward_code = request.POST['ward_code']
-#
-#             my_voter = Voter(id_serial_number=id_serial_number, email_id=email, first_name=first_name,
-#                              middle_name=middle_name, surname=surname, phone_number=phone_number,
-#                              gender=gender, photo=image, ward_code_id=ward_code)
-#
-#             my_voter.save()
-#
-#             return redirect('vote:success')
-#
-#     else:
-#         messages.info(request, "Login to continue")
-#         return redirect('vote:login')
-#
-#     return render(request, 'vote/user/update_details.html', context)
-
 
 
 def update_county(request, county_code):
@@ -907,13 +879,3 @@ def delete_ward(request, ward_code):
         return redirect('vote:admin_login')
 
     return render(request, 'vote/admin/delete_ward.html', context)
-
-
-def auth2(request):
-    return render(request, 'vote/user/auth2.html')
-
-
-def auth3(request):
-    return render(request, 'vote/user/auth3.html')
-
-
