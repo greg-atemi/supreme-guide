@@ -5,22 +5,11 @@
 {% endblock %}
 
 {% block body_block %}
-    <div class="search">
-        <div>
-            <img id=search src="{% static 'images/search.svg' %}" alt="search">
-            <form>
-                <input type="text" placeholder="Search">
-            </form>
-        </div>
-        <img id="dropdown" src="{% static 'images/dropdown.svg' %}" alt="search">
-    </div>
-
     <table class="table">
         <thead>
             <tr class="table-row">
                 <th class="head-item">CODE</th>
                 <th class="head-item">NAME</th>
-                <th class="head-item">NO. OF VOTERS</th>
                 <th class="head-item">COUNTY</th>
                 <th class="head-item"></th>
                 <th class="head-item"></th>
@@ -31,7 +20,6 @@
             <tr class="table-row">
                 <td class="cell">{{ constituency.constituency_code }}</td>
                 <td class="cell">{{ constituency.constituency_name }}</td>
-                <td class="cell">65000</td>
                 <td class="cell">{{ constituency.county_code }}</td>
                 <td class="cell" id="table1"><a class="action2" href="{% url 'vote:update_constituency' constituency.constituency_code %}">Update</a></td>
                 <td class="cell" id="table1"><a class="action" href="{% url 'vote:delete_constituency' constituency.constituency_code %}">Delete</a></td>

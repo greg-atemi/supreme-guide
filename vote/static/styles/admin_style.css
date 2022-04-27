@@ -4,7 +4,7 @@
 }
 
 html,body{
-    height:100%;
+    height:auto;
 }
 
 #spacer{
@@ -197,6 +197,7 @@ body{
     border-radius: 8px;
     border-collapse: collapse;
     margin-left: 40px;
+    margin-top: 40px;
     margin-bottom: 40px;
     width: 60%;
     background-color: #FFFFFF;
@@ -208,6 +209,7 @@ body{
     border-radius: 8px;
     border-collapse: collapse;
     margin-left: 40px;
+    margin-top: 40px;
     margin-bottom: 40px;
     width: 80%;
     background-color: #FFFFFF;

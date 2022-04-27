@@ -5,15 +5,6 @@
 {% endblock %}
 
 {% block body_block %}
-    <div class="search">
-        <div>
-            <img id=search src="{% static 'images/search.svg' %}" alt="search">
-            <form>
-                <input type="text" placeholder="Search">
-            </form>
-        </div>
-        <img id="dropdown" src="{% static 'images/dropdown.svg' %}" alt="search">
-    </div>
 
     <table class="table-long">
         <thead>
@@ -23,7 +14,8 @@
                 <th class="head-item">PHONE NUMBER</th>
                 <th class="head-item">GENDER</th>
                 <th class="head-item">EMAIL</th>
-                <th class="head-item"></th>
+                <th class="head-item">WARD</th>
+{#                <th class="head-item"></th>#}
             </tr>
         </thead>
         <tbody>
@@ -34,10 +26,11 @@
                 <td class="cell">{{ voter.phone_number }}</td>
                 <td class="cell">{{ voter.gender }}</td>
                 <td class="cell">{{ voter.email.email }}</td>
+                <td class="cell">{{ voter.ward_code }}</td>
 
-                <td class="image-cell">
-                    <img class="image" src="{{ voter.photo.url }}" alt="photo">
-                </td>
+{#                <td class="image-cell">#}
+{#                    <img class="image" src="{{ voter.photo.url }}" alt="photo">#}
+{#                </td>#}
 
             </tr>
         {% endfor %}
